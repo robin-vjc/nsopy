@@ -1,8 +1,8 @@
 from __future__ import print_function
 import numpy as np
-from ..subgradient_methods import SubgradientMethod
-from ..template_methods import TemplateMethod
-from ..method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger, DualDgmFgmMethodLogger
+from methods.subgradient_methods import SubgradientMethod
+from methods.template_methods import TemplateMethod
+from methods.method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger, DualDgmFgmMethodLogger
 from examples.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 import time
 

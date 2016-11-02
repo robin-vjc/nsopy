@@ -1,7 +1,7 @@
 from __future__ import print_function
 import numpy as np
-from ..universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
-from ..method_loggers import GenericDualMethodLogger, DualDgmFgmMethodLogger
+from methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
+from methods.method_loggers import GenericDualMethodLogger, DualDgmFgmMethodLogger
 from examples.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 #############

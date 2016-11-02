@@ -1,6 +1,6 @@
 import numpy as np
-from ..quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from ..method_loggers import GenericDualMethodLogger
+from methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
+from methods.method_loggers import GenericDualMethodLogger
 from examples.analytical_oracles import AnalyticalExampleInnerProblem
 
 

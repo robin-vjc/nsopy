@@ -1,3 +1,4 @@
+from __future__ import print_function
 from __future__ import division
 from method_loggers import Observable
 from base import DualMethod
@@ -18,8 +19,8 @@ class TemplateMethod(DualMethod, Observable):
         self.desc = 'template method'
 
     def dual_step(self):
-        print 'oracle: ' + str(self.oracle)
-        print 'proj: ' + str(self.projection_function)
-        print 'and we notify observers of the step'
+        print('oracle: ' + str(self.oracle))
+        print('proj: ' + str(self.projection_function))
+        print('and we notify observers of the step')
         self.x += 1
         self.notify_observers()
