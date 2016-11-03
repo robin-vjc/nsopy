@@ -7,6 +7,7 @@ from __future__ import division
 from method_loggers import Observable
 from base import DualMethod
 import numpy as np
+import copy
 
 METHOD_QUASI_MONOTONE_DEFAULT_GAMMA = 1.0
 
@@ -39,6 +40,7 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
     def dual_step(self):
         self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
         self.oracle_calls += 1
+        self.notify_observers()  # placed here to avoid mismatch between lambda_k and d_k
 
         self.s_k += self.diff_d_k
         lambda_k_plus = float(1.0)/float(self.gamma*np.sqrt(self.iteration_number+1)) * self.s_k
@@ -48,7 +50,7 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
                         + float(1.0)/float(self.iteration_number+2)*lambda_k_plus
 
         self.iteration_number += 1
-        self.notify_observers()
+        # self.notify_observers()
 
 
 # Implementation of "Subgradient Method with Triple Averaging", p.930.
@@ -70,7 +72,7 @@ class SGMTripleAveraging(DualMethod, Observable):
 
         self.d_k = 0
         self.lambda_k = np.zeros(self.n_constr, dtype=float)
-        self.lambda_0 = np.zeros(self.n_constr, dtype=float)
+        self.lambda_0 = copy.deepcopy(self.lambda_k)
         self.x_k = 0
 
         self.s_k = np.zeros(self.n_constr, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
@@ -82,6 +84,7 @@ class SGMTripleAveraging(DualMethod, Observable):
     def dual_step(self):
         self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
         self.oracle_calls += 1
+        self.notify_observers()
 
         # step 1
         if self.variant == 1:
@@ -120,4 +123,3 @@ class SGMTripleAveraging(DualMethod, Observable):
         self.lambda_k = (1-tau_t)*self.lambda_k + tau_t*lambda_k_hat
 
         self.iteration_number += 1
-        self.notify_observers()

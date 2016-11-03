@@ -7,3 +7,4 @@ gen
 *.pyc
 *.csv
 *.log
+notebooks/.ipynb_checkpoints

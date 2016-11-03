@@ -41,6 +41,9 @@ class SubgradientMethod(DualMethod, Observable):
     def dual_step(self):
         # get subgradient
         self.x_k, self.d_k, diff_d_k = self.oracle(self.lambda_k)
+        # log signal to any observers connected
+        self.notify_observers()
+
         # print(diff_d_k)
         self.oracle_calls += 1
 
@@ -59,12 +62,13 @@ class SubgradientMethod(DualMethod, Observable):
 
         # perform dual step
         # lambda_kp1 = P_{lambda>=0} (lambda_k + stepsize*diff_d_k)
-        self.lambda_k += stepsize * diff_d_k
+        # self.lambda_k += stepsize * diff_d_k  # this doesnt work anymore with the new version of numpy.
+        self.lambda_k = self.lambda_k + stepsize * diff_d_k
         self.lambda_k = self.projection_function(self.lambda_k)
 
         self.iteration_number += 1
 
+        # OLD
         # log signal to any observers connected
-        self.notify_observers()
-
+        # self.notify_observers()
 

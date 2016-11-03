@@ -64,7 +64,7 @@ def test_subgradient_method_sanity_checks():
 
     # print(logger.lambda_k_iterates)
     np.testing.assert_allclose(logger.lambda_k_iterates,
-                               np.array([[1.95], [3.9], [5.85], [7.8], [9.75], [11.7]]),
+                               np.array([[0], [1.95], [3.9], [5.85], [7.8], [9.75]]),  # [11.7]
                                atol=0.1)
 
 
@@ -85,7 +85,7 @@ def test_subgradient_method_on_analytical_example():
         dual_method.dual_step()
 
     # Method should end close to lambda*
-    np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([0.96, 1.]), rtol=1e-2, atol=0)
+    np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([0.91, 1.]), rtol=1e-2, atol=0)
     # with value close to dual optimum
     np.testing.assert_allclose(logger.d_k_iterates[-1], -0.54, rtol=1e-2, atol=0)
 
@@ -107,7 +107,7 @@ def test_enhanced_logger_on_analytical_example():
     # print logger.start_time
     # print logger.iteration_time
     # print logger.oracle_calls
-    assert logger.oracle_calls[-1] == 10
+    assert logger.oracle_calls[-1] == 9
 
 
 def test_subgradient_method_on_second_analytical_example():
@@ -127,7 +127,7 @@ def test_subgradient_method_on_second_analytical_example():
         dual_method.dual_step()
 
     # Method should end close to lambda*
-    np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([1., 0.03]), atol=0.01)
+    np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([1., 0.06]), atol=0.01)
     # with value close to dual optimum
     np.testing.assert_allclose(logger.d_k_iterates[-1], -1.02, atol=0.02)
 

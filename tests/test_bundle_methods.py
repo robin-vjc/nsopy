@@ -102,7 +102,7 @@ def test_bundle_method_on_analytical_example():
     logger = EnhancedDualMethodLogger(dual_method)
 
     for iteration in range(10):
-        print(dual_method.lambda_k)
+        # print(dual_method.lambda_k)
         # print(dual_method.d_k)
         dual_method.dual_step()
 

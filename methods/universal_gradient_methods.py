@@ -82,6 +82,7 @@ class UniversalPGM(DualMethod, Observable):
         if self.iteration_number == 1:
             self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
             self.oracle_calls += 1
+            self.notify_observers()
 
         ##############################
         # Step 1 (see (2.16) in [1]) #
@@ -202,6 +203,7 @@ class UniversalDGM(DualMethod, Observable):
             # if self.iteration_number == 1:
             self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
             self.oracle_calls += 1
+            self.notify_observers()
 
         ##########
         # Step 0 #

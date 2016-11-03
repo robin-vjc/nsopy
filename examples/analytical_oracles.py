@@ -234,36 +234,23 @@ class BertsekasCounterExample(object):
         self.n_constr = 2
 
     def oracle(self, lambda_k):
-        if not type(lambda_k) == np.ndarray:
-            print('WARNING: lambda_k should be a numpy array.')
-
-        c = np.zeros(5, dtype=float)
-        x_k = np.zeros(5, dtype=float)  # x1, x2, y1, y2, y
-
-        c[0] = - 1  # x1
-        c[1] = + 1  # x2
-        c[2] = lambda_k[0]  # y1
-        c[3] = lambda_k[1]  # y2
-        c[4] = 0.5 - lambda_k[0] - lambda_k[1]
-
-        x_k[0] = 1
-        x_k[1] = 0
-        x_k[2] = 1 if c[2] < 0 else 0
-        x_k[3] = 1 if c[3] < 0 else 0
-        x_k[4] = float(x_k[2] + x_k[3])/float(2)
-
-        diff_d_k = np.zeros(2)
-        diff_d_k[0] = x_k[2] - x_k[4]
-        diff_d_k[1] = x_k[3] - x_k[4]
-
-        if not abs(c[4] - 0) <= 0.01:
-            print('querying the dual function at an undefined point')
-            return x_k, -np.infty, np.array([np.infty, np.infty])
-
-        d_k = c[0]*x_k[0] + c[1]*x_k[1] + c[2]*x_k[2] + c[3]*x_k[3] + c[4]*x_k[4]
-
-        return x_k, d_k, diff_d_k
+        assert type(lambda_k) == np.ndarray, 'WARNING: lambda_k should be a numpy array.'
+        assert -3 <= lambda_k[0] <= 3, 'oracle must be queried within X'
+        assert -3 <= lambda_k[1] <= 3, 'oracle must be queried within X'
+        # compute function value a subgradient
+        if lambda_k[0] > abs(lambda_k[1]):
+            f_x = 5 * (9 * lambda_k[0] ** 2 + 16 * lambda_k[1] ** 2) ** (float(1) / float(2))
+            diff_f_x = np.array([float(9 * 5 * lambda_k[0]) / np.sqrt(9 * lambda_k[0] ** 2 + 16 * lambda_k[1] ** 2),
+                                 float(16 * 5 * lambda_k[0]) / np.sqrt(9 * lambda_k[0] ** 2 + 16 * lambda_k[1] ** 2)])
+        else:
+            f_x = 9 * lambda_k[0] + 16 * abs(lambda_k[1])
+            if lambda_k[1] >= 0:
+                diff_f_x = np.array([9, 16], dtype=float)
+            else:
+                diff_f_x = np.array([9, -16], dtype=float)
+        # print('queried at {}, f val is {}'.format(x, -f_x))
+        return 0, -f_x, -diff_f_x
 
     def projection_function(self, lambda_k):
-        # simply project lambda_k[0] on the positive orthant; lambda_k[1] free
-        return np.array([(lambda_k[0]-lambda_k[1])/float(2) + 0.25, (lambda_k[1]-lambda_k[0])/float(2) + 0.25])
+        # projection on the box is simply saturating the entries
+        return np.array([min(max(lambda_k[0], -3), 3), min(max(lambda_k[1], -3), 3)])
