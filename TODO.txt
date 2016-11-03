@@ -1,0 +1,11 @@
+# Easy
+- test coverage badge
+- explain how to use loggers and util to record as csv (utils)
+- config __init__.py such that you can do ``from nsopy import UniversalPGM''
+
+# Harder / New features
+- n_constr is awkward as a keyword; should be, e.g., n_x
+- think about an example for structured mrf (not multiple choice)
+- create wrapper nsoSolver(method='upgm', stopping=..., )
+- use cutting planes or yosida to get a stopping criterion for ALL methods
+- replace CP and BDL gurobi dependency with open source alternative?
