@@ -30,7 +30,7 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 
 * standard subgradient method, with constant and 1/k decaying stepsize
 * cutting planes (*requires Gurobi*)
-* a basic variant bundle method (*requires Gurobi*)
+* a basic variant of the bundle method (*requires Gurobi*)
 * 2x [quasi-monotone methods](http://link.springer.com/article/10.1007/s10957-014-0677-5) (DSA and TA)
 * 3x [universal gradient methods](http://link.springer.com/article/10.1007/s10107-014-0790-0) (UPGM, UDGM and UFGM)
 
