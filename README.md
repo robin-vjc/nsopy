@@ -24,6 +24,7 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 ### Advanced Applications
 
 * Decomposition of Stochastic Multistage Integer Programs
+![Scenario Tree](notebooks/img/stoch_tree.png)
 * Computer Vision (Distributed Computations of Markov Random Fields)
 
 #### Implemented Methods

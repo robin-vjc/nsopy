@@ -1,1 +1,4 @@
 from .methods.subgradient_methods import SubgradientMethod
+from .methods.bundle_methods import CuttingPlanesMethod, BundleMethod
+from .methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
+from .methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM

@@ -1,10 +1,10 @@
 # Centralize instantiation of dual methods. Useful in particular since the different
 # method classes have slightly different instantiation parameters.
 
-from methods.subgradient_methods import SubgradientMethod
-from methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
-from methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from methods.bundle_methods import CuttingPlanesMethod, BundleMethod
+from ..methods.subgradient_methods import SubgradientMethod
+from ..methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
+from ..methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
+from ..methods.bundle_methods import CuttingPlanesMethod, BundleMethod
 
 AVAILABLE_METHODS = (
     'SG 1/k',
@@ -18,6 +18,7 @@ AVAILABLE_METHODS = (
     'CP',
     'bundle'
 )
+
 
 def DualMethodsFactory(inner_problem, method, param=0):
     ###############
