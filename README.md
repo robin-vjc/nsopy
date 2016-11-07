@@ -45,7 +45,7 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 
 ### Advanced Applications
 
-* Decomposition of Stochastic Multistage Integer Programs
+* [Decomposition of Stochastic Multistage Integer Programs](https://github.com/robin-vjc/nsopy-stoch).
 <p align="center">
   <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="60%" href="#"/>
 </p>
