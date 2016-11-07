@@ -8,8 +8,14 @@ when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
 * the set ![X](img/XR.png) is convex
 
-**Note**: all the methods have been implemented to solve the equivalent problem of 
-*maximizing* a concave (non-smooth) function. This is because the main application intended is to 
+**Requirements and Remarks**:
+* A first-order oracle for the problem is needed: for a given point x, such an oracle returns the objective 
+function value and a valid subgradient; on constrained problems, we also need a valid projection function on ![X](img/XR.png).
+See the [basic analytical example](notebooks/Analytical Example.ipynb) for a working setup. 
+* Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
+be still useful for quick comparisons or for applications in which the main computational burden is in
+evaluating the first order oracle.
+* The methods solve the equivalent problem of *maximizing* a concave (non-smooth) function. This is because the main application intended is to 
 solve dual problems of minimizations, which naturally arise as maximizations. 
 See [basic example on duality](notebooks/Application to Duality.ipynb).
 
