@@ -28,7 +28,7 @@ take advantage of ``structure'' within difficult optimization programs. See exam
 Applied to the following Mixed-Integer Linear Program (MILP):
 
 <p align="center">
-  <img src="./img/primal_problem.png" alt="Example 2" width="50%" href="#"/>
+  <img src="./img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
 
