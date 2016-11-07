@@ -13,8 +13,17 @@ when
 solve dual problems of minimizations, which naturally arise as maximizations. 
 See [basic example on duality](notebooks/Application to Duality.ipynb).
 
+#### Why is this an important class of problems?
+
+There are several contexts in which non-smooth convex optimization programs arise naturally. 
+One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
+take advantage of ``structure'' within difficult optimization programs. See examples below.
+
 ### Basic Usage Examples
-* [Solving a Simple Analytical Problem](notebooks/Analytical Example.ipynb).
+<p align="center">
+  <img src="./notebooks/img/solved_ex_1.png" alt="Example"/>
+</p>
+
  ![Example](notebooks/img/solved_ex_1.png)
 * [Lagriangian Duality](notebooks/Application to Duality.ipynb). Taking advantage of duality to simplify hard problems. 
 Applied to the following Mixed-Integer Linear Program (MILP):
@@ -37,3 +46,7 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 
 **Note**: CP and Bundle methods require Gurobi (and the python package ``gurobipy``) to be installed. 
 If you are an academic, you can get a free license [here](http://www.gurobi.com/academia/for-universities]). 
+
+### Contributing
+
+Pull requests are very welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
