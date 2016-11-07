@@ -6,7 +6,7 @@ A set of first-order methods for solving
 
 when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
-* the set ![X](img/XR.png) is convex (and "simple"?)
+* the set ![X](img/XR.png) is convex
 
 **Note**: all the methods have been implemented to solve the equivalent problem of 
 *maximizing* a concave (non-smooth) function. This is because the main application intended is to 
@@ -21,10 +21,9 @@ take advantage of ``structure'' within difficult optimization programs. See exam
 
 ### Basic Usage Examples
 <p align="center">
-  <img src="./notebooks/img/solved_ex_1.png" alt="Example"/>
+  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="50%" href="#"/>
 </p>
 
- ![Example](notebooks/img/solved_ex_1.png)
 * [Lagriangian Duality](notebooks/Application to Duality.ipynb). Taking advantage of duality to simplify hard problems. 
 Applied to the following Mixed-Integer Linear Program (MILP):
 
@@ -33,7 +32,10 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 ### Advanced Applications
 
 * Decomposition of Stochastic Multistage Integer Programs
-![Scenario Tree](notebooks/img/stoch_tree.png)
+<p align="center">
+  <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="60%" href="#"/>
+</p>
+
 * Computer Vision (Distributed Computations of Markov Random Fields)
 
 #### Implemented Methods
@@ -44,7 +46,7 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 * 2x [quasi-monotone methods](http://link.springer.com/article/10.1007/s10957-014-0677-5) (DSA and TA)
 * 3x [universal gradient methods](http://link.springer.com/article/10.1007/s10107-014-0790-0) (UPGM, UDGM and UFGM)
 
-**Note**: CP and Bundle methods require Gurobi (and the python package ``gurobipy``) to be installed. 
+**Note**: Cutting Panes and Bundle methods require Gurobi (and the python package ``gurobipy``) to be installed. 
 If you are an academic, you can get a free license [here](http://www.gurobi.com/academia/for-universities]). 
 
 ### Contributing
