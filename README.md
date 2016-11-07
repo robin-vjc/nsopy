@@ -20,6 +20,9 @@ One such context is the lagrangian duality framework. Duality is an approach fre
 take advantage of ``structure'' within difficult optimization programs. See examples below.
 
 ### Basic Usage Examples
+
+* [Simple Analyitical Example](notebooks/Analytical Example.ipynb).
+
 <p align="center">
   <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="50%" href="#"/>
 </p>
