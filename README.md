@@ -21,10 +21,9 @@ take advantage of ``structure'' within difficult optimization programs. See exam
 
 ### Basic Usage Examples
 <p align="center">
-  <img src="./notebooks/img/solved_ex_1.png" alt="Example"/>
+  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
 </p>
 
- ![Example](notebooks/img/solved_ex_1.png)
 * [Lagriangian Duality](notebooks/Application to Duality.ipynb). Taking advantage of duality to simplify hard problems. 
 Applied to the following Mixed-Integer Linear Program (MILP):
 
@@ -33,7 +32,10 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 ### Advanced Applications
 
 * Decomposition of Stochastic Multistage Integer Programs
-![Scenario Tree](notebooks/img/stoch_tree.png)
+<p align="center">
+  <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="40%" href="#"/>
+</p>
+
 * Computer Vision (Distributed Computations of Markov Random Fields)
 
 #### Implemented Methods
