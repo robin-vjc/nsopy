@@ -23,7 +23,9 @@ See [basic example on duality](notebooks/Application to Duality.ipynb).
 
 There are several contexts in which non-smooth convex optimization programs arise naturally. 
 One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
-take advantage of ``structure'' within difficult optimization programs. See examples below.
+take advantage of ``structure'' within difficult optimization programs. 
+[Here](notebooks/Application to Duality.ipynb) is quick intro on Lagrangian duality; 
+see further below for [more advance applications](#Advanced Applications).
 
 ### Basic Usage Examples
 
