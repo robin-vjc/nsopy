@@ -27,7 +27,10 @@ take advantage of ``structure'' within difficult optimization programs. See exam
 * [Lagriangian Duality](notebooks/Application to Duality.ipynb). Taking advantage of duality to simplify hard problems. 
 Applied to the following Mixed-Integer Linear Program (MILP):
 
-![Example 2](img/primal_problem.png)
+<p align="center">
+  <img src="./img/primal_problem.png" alt="Example 2" width="50%" href="#"/>
+</p>
+
 
 ### Advanced Applications
 
