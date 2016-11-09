@@ -14,7 +14,7 @@ import numpy as np
 
 class SubgradientMethod(DualMethod, Observable):
     """ Standard subgradient method """
-    def __init__(self, oracle, projection_function, n_constr=0, stepsize_rule='1/k', stepsize_0=1.0):
+    def __init__(self, oracle, projection_function, dimension=0, stepsize_rule='1/k', stepsize_0=1.0):
         super(SubgradientMethod, self).__init__()
 
         self.desc = 'SG, $s_0 = {}$'.format(stepsize_0)
@@ -27,10 +27,14 @@ class SubgradientMethod(DualMethod, Observable):
         self.oracle_calls = 0
         # self.stepsize_0 = stepsize_0 * np.ones(1, dtype=float)  # ensures it's float, for division
         self.stepsize_0 = float(stepsize_0)  # ensures it's float, for division
-        self.n_constr = n_constr
 
         self.d_k = np.zeros(1, dtype=float)
-        self.lambda_k = self.projection_function(np.zeros(self.n_constr, dtype=float))
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
         self.x_k = 0
 
         # for record keeping

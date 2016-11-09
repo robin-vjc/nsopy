@@ -20,7 +20,7 @@ class AnalyticalExampleInnerProblem(object):
         d(lambda*) = -0.5
     """
     def __init__(self):
-        self.n_constr = 2
+        self.dimension = 2
 
     def oracle(self, lambda_k):
         if not type(lambda_k) == np.ndarray:
@@ -75,6 +75,8 @@ class AnalyticalExampleInnerProblem(object):
         return x_k, d_k, diff_d_k
 
     def projection_function(self, lambda_k):
+        if lambda_k is 0:
+            return np.zeros(self.dimension)
         # simply project lambda_k on the positive orthant
         return np.maximum(lambda_k, 0)
 
@@ -107,7 +109,7 @@ class SecondAnalyticalExampleInnerProblem(object):
     d(lambda, mu) = -1 + 1.5mu
     """
     def __init__(self):
-        self.n_constr = 2
+        self.dimension = 2
         # below for record keeping
         self.instance_name = 'Second Analytical Example'
         self.instance_type = 'analytical'
@@ -185,7 +187,7 @@ class ConstrainedDualAnalyticalExampleInnerProblem(object):
     else throw warning (and return d = -infty, diff_d_k = infty)
     """
     def __init__(self):
-        self.n_constr = 2
+        self.dimension = 2
 
     def oracle(self, lambda_k):
         if not type(lambda_k) == np.ndarray:
@@ -231,7 +233,7 @@ class BertsekasCounterExample(object):
 
     """
     def __init__(self):
-        self.n_constr = 2
+        self.dimension = 2
 
     def oracle(self, lambda_k):
         assert type(lambda_k) == np.ndarray, 'WARNING: lambda_k should be a numpy array.'

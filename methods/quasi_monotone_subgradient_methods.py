@@ -15,7 +15,7 @@ METHOD_QUASI_MONOTONE_DEFAULT_GAMMA = 1.0
 # Implementation of "Subgradient Method with Double Simple Averaging", p.928.
 class SGMDoubleSimpleAveraging(DualMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, n_constr=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
+    def __init__(self, oracle, projection_function, dimension=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
         super(SGMDoubleSimpleAveraging, self).__init__()
 
         self.desc = 'DSA, $\gamma = {}$'.format(gamma)
@@ -23,15 +23,20 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
         self.projection_function = projection_function
 
         self.oracle_calls = 0
-        self.n_constr = n_constr
         self.iteration_number = 0
 
-        self.d_k = 0
-        self.lambda_k = np.zeros(self.n_constr, dtype=float)
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
+
+        self.lambda_k = np.zeros(self.dimension, dtype=float)
         self.x_k = 0
 
         self.gamma = gamma
-        self.s_k = np.zeros(self.n_constr, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
+        self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
 
         # for record keeping
         self.method_name = 'DSA'
@@ -56,7 +61,7 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
 # Implementation of "Subgradient Method with Triple Averaging", p.930.
 class SGMTripleAveraging(DualMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, n_constr=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
+    def __init__(self, oracle, projection_function, dimension=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
         super(SGMTripleAveraging, self).__init__()
 
         self.desc = 'TA, $\gamma = {}$'.format(gamma)
@@ -65,17 +70,22 @@ class SGMTripleAveraging(DualMethod, Observable):
         self.projection_function = projection_function
 
         self.oracle_calls = 0
-        self.n_constr = n_constr
         self.iteration_number = 0
         self.gamma = gamma
         self.variant = variant
 
         self.d_k = 0
-        self.lambda_k = np.zeros(self.n_constr, dtype=float)
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
+
         self.lambda_0 = copy.deepcopy(self.lambda_k)
         self.x_k = 0
 
-        self.s_k = np.zeros(self.n_constr, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
+        self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
 
         # for record keeping
         self.method_name = 'TA'

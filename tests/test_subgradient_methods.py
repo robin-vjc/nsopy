@@ -34,7 +34,7 @@ def test_subgradient_method_sanity_checks():
     # custom STEPSIZE_0
     subgradient_method = SubgradientMethod(mock_one_dim_oracle,
                                            mock_projection_function,
-                                           n_constr=1,
+                                           dimension=1,
                                            stepsize_0=1.5,
                                            stepsize_rule='constant')
     # logging
@@ -75,7 +75,7 @@ def test_subgradient_method_on_analytical_example():
 
     dual_method = SubgradientMethod(analytical_inner_problem.oracle,
                                     analytical_inner_problem.projection_function,
-                                    n_constr=analytical_inner_problem.n_constr)
+                                    dimension=analytical_inner_problem.dimension)
 
     logger = GenericDualMethodLogger(dual_method)
 
@@ -96,7 +96,7 @@ def test_enhanced_logger_on_analytical_example():
 
     dual_method = SubgradientMethod(analytical_inner_problem.oracle,
                                     analytical_inner_problem.projection_function,
-                                    n_constr=analytical_inner_problem.n_constr)
+                                    dimension=analytical_inner_problem.dimension)
 
     logger = EnhancedDualMethodLogger(dual_method)
 
@@ -117,7 +117,7 @@ def test_subgradient_method_on_second_analytical_example():
 
     dual_method = SubgradientMethod(analytical_inner_problem.oracle,
                                     analytical_inner_problem.projection_function,
-                                    n_constr=analytical_inner_problem.n_constr)
+                                    dimension=analytical_inner_problem.dimension)
 
     logger = GenericDualMethodLogger(dual_method)
 
@@ -139,7 +139,7 @@ def test_subgradient_method_on_third_analytical_example():
 
     dual_method = SubgradientMethod(analytical_inner_problem.oracle,
                                     analytical_inner_problem.projection_function,
-                                    n_constr=analytical_inner_problem.n_constr)
+                                    dimension=analytical_inner_problem.dimension)
 
     # dual_method.lambda_k = dual_method.projection_function(np.array([-1,1]))
     logger = EnhancedDualMethodLogger(dual_method)
@@ -165,7 +165,7 @@ def test_subgradient_method_on_third_analytical_example_non_zero_start():
 
     dual_method = SubgradientMethod(analytical_inner_problem.oracle,
                                     analytical_inner_problem.projection_function,
-                                    n_constr=analytical_inner_problem.n_constr)
+                                    dimension=analytical_inner_problem.dimension)
 
     # we set the initial point somewhere not 0
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))

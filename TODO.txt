@@ -4,7 +4,6 @@
 - config __init__.py such that you can do ``from nsopy import UniversalPGM''
 
 # Harder / New features
-- n_constr is awkward as a keyword; should be, e.g., "n_x" or "dimension", "dim" and should be optional (if oracle responds to 0)
 - think about an example for structured mrf (not multiple choice)
 - create wrapper nsoSolver(method='upgm', stopping=..., )
 - use cutting planes or yosida to get a stopping criterion for ALL methods
