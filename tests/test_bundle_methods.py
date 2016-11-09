@@ -15,7 +15,7 @@ def test_cp_method_on_analytical_example():
 
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
-                                      n_constr=analytical_inner_problem.n_constr,
+                                      dimension=analytical_inner_problem.dimension,
                                       epsilon=0.01)
 
     logger = EnhancedDualMethodLogger(dual_method)
@@ -42,7 +42,7 @@ def test_cp_method_on_second_analytical_example():
 
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
-                                      n_constr=analytical_inner_problem.n_constr,
+                                      dimension=analytical_inner_problem.dimension,
                                       epsilon=0.01)
 
     logger = EnhancedDualMethodLogger(dual_method)
@@ -65,7 +65,7 @@ def test_cp_method_on_third_analytical_example():
 
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
-                                      n_constr=analytical_inner_problem.n_constr,
+                                      dimension=analytical_inner_problem.dimension,
                                       epsilon=0.01)
     dual_method.set_dual_domain(type='sum to param', param=0.5)
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
@@ -95,7 +95,7 @@ def test_bundle_method_on_analytical_example():
 
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
     dual_method.set_dual_domain(type='positive orthant', param=0.5)
 
@@ -124,7 +124,7 @@ def test_bundle_method_on_second_analytical_example():
 
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
 
     logger = EnhancedDualMethodLogger(dual_method)
@@ -147,7 +147,7 @@ def test_bundle_method_on_third_analytical_example():
 
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
     dual_method.set_dual_domain(type='sum to param', param=0.5)
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))

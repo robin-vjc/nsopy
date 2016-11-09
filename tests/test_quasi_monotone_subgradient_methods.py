@@ -15,7 +15,7 @@ def test_DSA_on_analytical_example():
     GAMMA = 0.5
     dual_method = SGMDoubleSimpleAveraging(analytical_inner_problem.oracle,
                                            analytical_inner_problem.projection_function,
-                                           n_constr=analytical_inner_problem.n_constr,
+                                           dimension=analytical_inner_problem.dimension,
                                            gamma=GAMMA)
     logger = GenericDualMethodLogger(dual_method)
 
@@ -42,7 +42,7 @@ def test_TSA_variant_1_on_analytical_example():
     GAMMA = 0.5
     dual_method = SGMTripleAveraging(analytical_inner_problem.oracle,
                                      analytical_inner_problem.projection_function,
-                                     n_constr=analytical_inner_problem.n_constr,
+                                     dimension=analytical_inner_problem.dimension,
                                      variant=1,
                                      gamma=GAMMA)
     logger = GenericDualMethodLogger(dual_method)
@@ -70,7 +70,7 @@ def test_TSA_variant_2_on_analytical_example():
     GAMMA = 1.0
     dual_method = SGMTripleAveraging(analytical_inner_problem.oracle,
                                      analytical_inner_problem.projection_function,
-                                     n_constr=analytical_inner_problem.n_constr,
+                                     dimension=analytical_inner_problem.dimension,
                                      variant=2,
                                      gamma=GAMMA)
     logger = GenericDualMethodLogger(dual_method)
@@ -98,7 +98,7 @@ def test_DSA_on_Bertsekas_example():
     GAMMA = 0.5
     dual_method = SGMDoubleSimpleAveraging(analytical_inner_problem.oracle,
                                            analytical_inner_problem.projection_function,
-                                           n_constr=analytical_inner_problem.n_constr,
+                                           dimension=analytical_inner_problem.dimension,
                                            gamma=0.5)
     logger = GenericDualMethodLogger(dual_method)
 

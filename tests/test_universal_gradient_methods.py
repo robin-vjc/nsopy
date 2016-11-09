@@ -16,7 +16,7 @@ def test_UPGM_on_analytical_example():
 
     dual_method = UniversalPGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
 
     logger = GenericDualMethodLogger(dual_method)
@@ -39,7 +39,7 @@ def test_UPGM_on_second_analytical_example():
 
     dual_method = UniversalPGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
 
     logger = GenericDualMethodLogger(dual_method)
@@ -63,7 +63,7 @@ def test_UPGM_on_third_analytical_example_non_zero_start():
 
     dual_method = UniversalPGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr)
+                               dimension=analytical_inner_problem.dimension)
 
     # we set the initial point somewhere not 0
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
@@ -95,7 +95,7 @@ def test_UDGM_on_analytical_example():
 
     dual_method = UniversalDGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
     # epsilon=0.5)
 
@@ -119,7 +119,7 @@ def test_UDGM_on_second_analytical_example():
 
     dual_method = UniversalDGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
     # epsilon=0.5)
 
@@ -144,7 +144,7 @@ def test_UDGM_on_third_analytical_example_non_zero_start():
 
     dual_method = UniversalDGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.1)
 
     # we set the initial point somewhere not 0
@@ -175,7 +175,7 @@ def test_UFGM_on_analytical_example():
 
     dual_method = UniversalFGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.1)
 
     logger = GenericDualMethodLogger(dual_method)
@@ -198,7 +198,7 @@ def test_UFGM_on_second_analytical_example():
 
     dual_method = UniversalFGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
     # epsilon=0.5)
 
@@ -223,7 +223,7 @@ def test_UFGM_on_third_analytical_example_non_zero_start():
 
     dual_method = UniversalFGM(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
-                               n_constr=analytical_inner_problem.n_constr,
+                               dimension=analytical_inner_problem.dimension,
                                epsilon=0.01)
 
     # we set the initial point somewhere not 0

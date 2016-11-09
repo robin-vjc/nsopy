@@ -33,7 +33,7 @@ class UniversalPGM(DualMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, n_constr=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
         super(UniversalPGM, self).__init__()
 
         self.desc = 'UPGM, $\epsilon = {}$'.format(epsilon)
@@ -42,10 +42,14 @@ class UniversalPGM(DualMethod, Observable):
 
         self.iteration_number = 1
         self.oracle_calls = 0
-        self.n_constr = n_constr
 
         self.d_k = np.zeros(1, dtype=float)
-        self.lambda_k = self.projection_function(np.zeros(self.n_constr, dtype=float))
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
         self.x_k = 0
 
         # specific to U-PGM
@@ -145,7 +149,7 @@ class UniversalDGM(DualMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, n_constr=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
         super(UniversalDGM, self).__init__()
 
         self.desc = 'UDGM, $\epsilon = {}$'.format(epsilon)
@@ -155,10 +159,16 @@ class UniversalDGM(DualMethod, Observable):
 
         self.iteration_number = 1
         self.oracle_calls = 0
-        self.n_constr = n_constr
 
         # self.d_k = np.zeros(1, dtype=float)
-        self.lambda_k = self.projection_function(np.zeros(self.n_constr, dtype=float))
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
+        # self.dimension = dimension
+        # self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
 
         # # Init of the method
         # # if it's the first iteration, we have to make an oracle call to fill the subgradient and the d_k
@@ -273,7 +283,7 @@ class UniversalFGM(DualMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, n_constr=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON):
         super(UniversalFGM, self).__init__()
 
         self.desc = 'UFGM, $\epsilon = {}$'.format(epsilon)
@@ -283,10 +293,14 @@ class UniversalFGM(DualMethod, Observable):
 
         self.iteration_number = 1
         self.oracle_calls = 0
-        self.n_constr = n_constr
 
         self.d_k = np.zeros(1, dtype=float)
-        self.lambda_k = np.zeros(self.n_constr, dtype=float)
+        if dimension == 0:
+            self.lambda_k = self.projection_function(0)
+            self.dimension = len(self.lambda_k)
+        else:
+            self.dimension = dimension
+            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
         self.x_k = 0
 
         # specific to U-PGM
