@@ -53,8 +53,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
     #############
     elif method == 'UPGM':
         if param == 0:
-            from methods.universal_gradient_methods import METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
-            epsilon = METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
+            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
 
@@ -64,8 +64,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
                             epsilon=epsilon)
     elif method == 'UDGM':
         if param == 0:
-            from methods.universal_gradient_methods import METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
-            epsilon = METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
+            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
 
@@ -75,8 +75,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
                             epsilon=epsilon)
     elif method == 'UFGM':
         if param == 0:
-            from methods.universal_gradient_methods import METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
-            epsilon = METHOD_UNIVERSAL_GRADIENT_DEFAULT_EPSILON
+            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
 

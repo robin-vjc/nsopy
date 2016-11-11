@@ -21,9 +21,10 @@ def test_UPGM_on_analytical_example():
 
     logger = GenericDualMethodLogger(dual_method)
 
-    for iteration in range(20):
-        # print(dual_method.lambda_k)
-        # print(dual_method.d_k)
+    for iteration in range(50):
+        print(dual_method.S_k)
+        print(dual_method.lambda_k)
+        print(dual_method.d_k)
         dual_method.dual_step()
 
     # Method should end close to lambda*
@@ -66,11 +67,12 @@ def test_UPGM_on_third_analytical_example_non_zero_start():
                                dimension=analytical_inner_problem.dimension)
 
     # we set the initial point somewhere not 0
-    dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
+    dual_method.lambda_hat_k = dual_method.projection_function(np.array([-2, 2]))
     logger = GenericDualMethodLogger(dual_method)
 
     for iteration in range(5):
-        # print(dual_method.lambda_k)
+        print(dual_method.lambda_k)
+        print(dual_method.lambda_tilde_k)
         # print(dual_method.d_k)
         dual_method.dual_step()
 
@@ -148,7 +150,7 @@ def test_UDGM_on_third_analytical_example_non_zero_start():
                                epsilon=0.1)
 
     # we set the initial point somewhere not 0
-    dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
+    dual_method.lambda_hat_k = dual_method.projection_function(np.array([-2, 2]))
     logger = DualDgmFgmMethodLogger(dual_method)
 
     for iteration in range(25):
