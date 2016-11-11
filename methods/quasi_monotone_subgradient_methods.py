@@ -4,8 +4,8 @@
 # http://link.springer.com/article/10.1007/s10957-014-0677-5
 
 from __future__ import division
-from method_loggers import Observable
-from base import DualMethod
+from nsopy.methods.method_loggers import Observable
+from nsopy.methods.base import DualMethod
 import numpy as np
 import copy
 

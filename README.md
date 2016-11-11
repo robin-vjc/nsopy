@@ -39,7 +39,7 @@ see further below for [more advance applications](#Advanced Applications).
 Applied to the following Mixed-Integer Linear Program (MILP):
 
 <p align="center">
-  <img src="./img/primal_problem.png" alt="Example 2" href="#"/>
+  <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
 

@@ -1,7 +1,7 @@
 import numpy as np
-from methods.bundle_methods import CuttingPlanesMethod, BundleMethod
-from methods.method_loggers import EnhancedDualMethodLogger
-from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+from nsopy.methods.bundle_methods import CuttingPlanesMethod, BundleMethod
+from nsopy.methods.method_loggers import EnhancedDualMethodLogger
+from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
 ##################

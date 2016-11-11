@@ -3,10 +3,10 @@ from __future__ import print_function
 import time
 
 import numpy as np
-from methods.method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger
-from methods.subgradient_methods import SubgradientMethod
-from methods.template_methods import TemplateMethod
-from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+from nsopy.methods.method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger
+from nsopy.methods.subgradient_methods import SubgradientMethod
+from nsopy.methods.template_methods import TemplateMethod
+from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
 def test_templates():
