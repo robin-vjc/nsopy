@@ -1,7 +1,7 @@
-from examples.analytical_oracles import SecondAnalyticalExampleInnerProblem
-from methods.methods_factory import DualMethodsFactory, AVAILABLE_METHODS
 from methods.method_loggers import SlimDualMethodLogger
+from methods.methods_factory import DualMethodsFactory
 from methods.utils import record_logger
+from tests.analytical_oracles import SecondAnalyticalExampleInnerProblem
 
 
 def test_slimlogger_recorder():

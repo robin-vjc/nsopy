@@ -1,10 +1,13 @@
 from __future__ import print_function
+
+import time
+
 import numpy as np
+from methods.method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger
 from methods.subgradient_methods import SubgradientMethod
 from methods.template_methods import TemplateMethod
-from methods.method_loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger, DualDgmFgmMethodLogger
-from examples.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
-import time
+from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+
 
 def test_templates():
     """ basically make sure that the observer pattern is implemented correctly """

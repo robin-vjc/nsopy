@@ -2,11 +2,11 @@
 
 A set of first-order methods for solving
 
-![optimization problem](img/min_opt.png "Non-Smooth Optimization Program")
+![optimization problem](notebooks/img/min_opt.png "Non-Smooth Optimization Program")
 
 when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
-* the set ![X](img/XR.png) is convex
+* the set ![X](notebooks/img/XR.png) is convex
 
 **Requirements and Remarks**:
 * A first-order oracle for the problem is needed: for a given point x, such an oracle returns the objective 

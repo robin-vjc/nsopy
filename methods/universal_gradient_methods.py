@@ -357,7 +357,7 @@ class UniversalFGM(DualMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False):
         super(UniversalFGM, self).__init__()
 
         self.desc = 'UFGM, $\epsilon = {}$'.format(epsilon)
@@ -368,27 +368,39 @@ class UniversalFGM(DualMethod, Observable):
         self.iteration_number = 1
         self.oracle_calls = 0
 
-        self.d_k = np.zeros(1, dtype=float)
+        self.d_hat_k = np.zeros(1, dtype=float)
         if dimension == 0:
-            self.lambda_k = self.projection_function(0)
-            self.dimension = len(self.lambda_k)
+            self.lambda_hat_k = self.projection_function(0)
+            self.dimension = len(self.lambda_hat_k)
         else:
             self.dimension = dimension
-            self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
-        self.x_k = 0
+            self.lambda_hat_k = self.projection_function(np.zeros(self.dimension, dtype=float))
+        self.x_hat_k = 0
 
         # specific to U-PGM
-        self.diff_d_k = 0
+        self.diff_d_hat_k = 0
         self.L_k = float(UGM_DEFAULT_L_0)  # if you use something else, make sure it's a float!
         self.epsilon = float(epsilon)
         self.i_k = 0
-        self.phi_k = copy.deepcopy(self.lambda_k)
+        self.phi_k = copy.deepcopy(self.lambda_hat_k)
 
-        self.y_k = copy.deepcopy(self.lambda_k)
+        self.y_k = copy.deepcopy(self.lambda_hat_k)
         self.A_k = 0
-        self.a_k = copy.deepcopy(self.lambda_k)
+        self.a_k = copy.deepcopy(self.lambda_hat_k)
         self.tau_k = 0
         self.v_k = 0
+
+        self.averaging = averaging
+        if self.averaging:
+            self.lambda_k = self.y_k
+            self.d_k = self.d_hat_k
+            self.diff_d_k = self.diff_d_hat_k
+            self.x_k = self.x_hat_k
+        else:
+            self.lambda_k = self.lambda_hat_k
+            self.d_k = self.d_hat_k
+            self.diff_d_k = self.diff_d_hat_k
+            self.x_k = self.x_hat_k
 
         # for record keeping
         self.method_name = 'UFGM'
@@ -443,19 +455,31 @@ class UniversalFGM(DualMethod, Observable):
 
         self.iteration_number += 1
         # Perform step
-        self.lambda_k = lambda_kp_ik
+        self.lambda_hat_k = lambda_kp_ik
         self.y_k = y_kp_ik
         self.a_k = a_kp_ik
         self.tau_k = tau_k_ik
         self.A_k = self.A_k + self.a_k
         self.L_k = 2**(i_k-1)*self.L_k
-        self.phi_k += self.a_k * self.diff_d_k
+        self.phi_k += self.a_k * self.diff_d_hat_k
 
         # Record additional information about iterate
-        self.d_k= d_kp_ik
-        self.diff_d_k = diff_kp_ik
-        self.x_k = x_kp_ik
+        self.d_hat_k= d_kp_ik
+        self.diff_d_hat_k = diff_kp_ik
+        self.x_hat_k = x_kp_ik
         self.i_k = i_k
+
+        # Calculate ouputs depending on whether averaging is active or not:
+        if self.averaging:
+            # we have an additional oracle call
+            self.lambda_k = self.y_k
+            self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
+            self.oracle_calls += 1
+        else:
+            self.x_k = self.x_hat_k
+            self.d_k = self.d_hat_k
+            self.lambda_k = self.lambda_hat_k
+            self.diff_d_k = self.diff_d_hat_k
 
         # log signal to any observers connected
         self.notify_observers()
