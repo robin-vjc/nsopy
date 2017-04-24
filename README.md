@@ -6,12 +6,17 @@ A set of first-order methods for solving
 
 when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
-* the set ![X](notebooks/img/XR.png) is convex
+* the set ![X](notebooks/img/XR.png) is convex.
 
-**Requirements and Remarks**:
-* A first-order oracle for the problem is needed: for a given point x, such an oracle returns the objective 
-function value and a valid subgradient; on constrained problems, we also need a valid projection function on ![X](img/XR.png).
-See the [basic analytical example](notebooks/Analytical Example.ipynb) for a working setup. 
+See the [basic analytical example](notebooks/Analytical Example.ipynb) for a complete working setup. 
+
+**Requirements and Important Remarks:**
+* A first-order oracle for the problem is needed. For a given point x, such an oracle returns the objective 
+function value and a valid subgradient; on constrained problems, we also need a valid projection function onto 
+![X](notebooks/img/XR.png). 
+* Generally, we expect this projection operation to be computationally inexpensive, 
+[here is a list of important examples](notebooks/img/simple_projections.png) for which this is the case.
+
 * Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
 be still useful for quick comparisons or for applications in which the main computational burden is in
 evaluating the first order oracle.
@@ -21,7 +26,7 @@ See [basic example on duality](notebooks/Application to Duality.ipynb).
 
 #### Why is this an important class of problems?
 
-There are several contexts in which non-smooth convex optimization programs arise naturally. 
+There are several practical contexts in which non-smooth convex optimization programs arise. 
 One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
 take advantage of ``structure'' within difficult optimization programs. 
 [Here](notebooks/Application to Duality.ipynb) is quick intro on Lagrangian duality; 

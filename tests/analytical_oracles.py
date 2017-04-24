@@ -23,8 +23,7 @@ class AnalyticalExampleInnerProblem(object):
         self.dimension = 2
 
     def oracle(self, lambda_k):
-        if not type(lambda_k) == np.ndarray:
-            print('WARNING: lambda_k should be a numpy array.')
+        assert type(lambda_k) == np.ndarray, 'WARNING: lambda_k should be a numpy array.'
 
         ###########################
         # Construct inner problem #
@@ -116,8 +115,7 @@ class SecondAnalyticalExampleInnerProblem(object):
         self.instance_subtype = 'analytical'
 
     def oracle(self, lambda_k):
-        if not type(lambda_k) == np.ndarray:
-            print('WARNING: lambda_k should be a numpy array.')
+        assert type(lambda_k) == np.ndarray, 'WARNING: lambda_k should be a numpy array.'
 
         c = np.zeros(2, dtype=float)
         x_k = np.zeros(2, dtype=float)
@@ -190,8 +188,7 @@ class ConstrainedDualAnalyticalExampleInnerProblem(object):
         self.dimension = 2
 
     def oracle(self, lambda_k):
-        if not type(lambda_k) == np.ndarray:
-            print('WARNING: lambda_k should be a numpy array.')
+        assert type(lambda_k) == np.ndarray, 'WARNING: lambda_k should be a numpy array.'
 
         c = np.zeros(5, dtype=float)
         x_k = np.zeros(5, dtype=float)  # x1, x2, y1, y2, y

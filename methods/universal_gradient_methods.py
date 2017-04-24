@@ -72,10 +72,10 @@ class UniversalPGM(DualMethod, Observable):
         self.epsilon = float(epsilon)
         self.i_k = 0
 
-        # -- OPTIONAL -- Synthesize averaged outputs
+        # -- Averaging -- Synthesize averaged outputs
         # Variables to synthesize solution from algorithm's process
         # records of d_tilda_k and lambda_tilda_k ("averages") according to Eqns. below 2.17
-        self.S_k = 0
+        self.S_k = float(1)/float(self.L_k)
         self.lambda_tilde_k = copy.deepcopy(self.lambda_hat_k)
         self.sum_lambda_tilde_k = copy.deepcopy(self.lambda_hat_k)  # \sum_i=0^k lambda_tilda_k
         self.d_tilde_k = 0
@@ -92,7 +92,7 @@ class UniversalPGM(DualMethod, Observable):
             self.d_k = self.d_hat_k
             self.diff_d_k = self.diff_d_hat_k
             self.x_k = self.x_hat_k
-        # -- OPTIONAL --
+        # -- Averaging --
 
         # for record keeping
         self.method_name = 'UPGM'
@@ -147,7 +147,7 @@ class UniversalPGM(DualMethod, Observable):
         self.iteration_number += 1
         self.L_k = 2**(i_k-1)*self.L_k
 
-        # -- OPTIONAL -- Synthesize outputs
+        # -- Averaging -- Synthesize outputs
         self.S_k += float(1)/float(self.L_k)
         self.sum_lambda_tilde_k += float(1) / float(self.L_k) * self.lambda_hat_k
         self.lambda_tilde_k = float(1) / float(self.S_k) * self.sum_lambda_tilde_k
@@ -159,7 +159,7 @@ class UniversalPGM(DualMethod, Observable):
         # self.lambda_tilde_k = float(1) / float(self.S_k) * self.sum_lambda_tilde_k
         # self.sum_d_tilde_k += self.L_k * self.d_hat_k
         # self.d_tilde_k = float(1) / float(self.S_k) * self.sum_d_tilde_k
-        # -- OPTIONAL --
+        # -- Averaging --
 
         # Update
         self.lambda_hat_k = lambda_k_plus
@@ -173,7 +173,9 @@ class UniversalPGM(DualMethod, Observable):
         # Calculate ouputs depending on whether averaging is active or not:
         if self.averaging:
             # we have an additional oracle call
-            self.lambda_k = self.lambda_tilde_k
+            # projection here would not be required technically, but because of numerics when constructing the convex
+            # combination, we call it
+            self.lambda_k = self.projection_function(self.lambda_tilde_k)
             self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
             self.oracle_calls += 1
         else:
@@ -233,10 +235,10 @@ class UniversalDGM(DualMethod, Observable):
         self.i_k = 0
         self.phi_k = copy.deepcopy(self.lambda_hat_k)
 
-        # -- OPTIONAL -- Synthesize outputs
+        # -- Averaging -- Synthesize outputs
         # Variables to synthesize solution from algorithm's process
         # records of d_tilda_k and lambda_tilda_k ("averages") according to Eqns. below 2.17
-        self.S_k = 0
+        self.S_k = float(1)/float(self.L_k)
         self.lambda_tilde_k = copy.deepcopy(self.lambda_hat_k)
         self.sum_lambda_tilde_k = copy.deepcopy(self.lambda_hat_k)  # \sum_i=0^k lambda_tilda_k
         self.d_tilde_k = 0
@@ -253,7 +255,7 @@ class UniversalDGM(DualMethod, Observable):
             self.d_k = self.d_hat_k
             self.diff_d_k = self.diff_d_hat_k
             self.x_k = self.x_hat_k
-        # -- OPTIONAL --
+        # -- Averaging --
 
         # for record keeping
         self.method_name = 'UDGM'
@@ -315,13 +317,13 @@ class UniversalDGM(DualMethod, Observable):
         self.iteration_number += 1
         self.L_k = 2**(i_k-1)*self.L_k
 
-        # -- OPTIONAL -- Synthesize outputs
+        # -- Averaging -- Synthesize outputs
         self.S_k += float(1)/float(self.L_k)
         self.sum_lambda_tilde_k += float(1) / float(self.L_k) * bregman_lambda_k_ik
         self.lambda_tilde_k = float(1) / float(self.S_k) * self.sum_lambda_tilde_k
         self.sum_d_tilde_k += float(1) / float(self.L_k) * bregman_d_k_ik
         self.d_tilde_k = float(1) / float(self.S_k) * self.sum_d_tilde_k
-        # -- OPTIONAL --
+        # -- Averaging --
 
         self.lambda_hat_k = lambda_k_ik
         self.phi_k += float(1.0)/(2*self.L_k)*self.diff_d_hat_k
@@ -334,7 +336,9 @@ class UniversalDGM(DualMethod, Observable):
         # Calculate ouputs depending on whether averaging is active or not:
         if self.averaging:
             # we have an additional oracle call
-            self.lambda_k = self.lambda_tilde_k
+            # projection here would not be required technically, but because of numerics when constructing the convex
+            # combination, we call it
+            self.lambda_k = self.projection_function(self.lambda_tilde_k)
             self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
             self.oracle_calls += 1
         else:
