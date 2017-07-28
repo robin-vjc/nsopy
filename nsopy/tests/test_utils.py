@@ -1,6 +1,6 @@
-from nsopy.methods.method_loggers import SlimDualMethodLogger
-from nsopy.methods.methods_factory import DualMethodsFactory
-from nsopy.methods.utils import record_logger
+from nsopy.method_loggers import SlimDualMethodLogger
+from nsopy.methods_factory import DualMethodsFactory
+from nsopy.utils import record_logger
 from nsopy.tests.analytical_oracles import SecondAnalyticalExampleInnerProblem
 
 

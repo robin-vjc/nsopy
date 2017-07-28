@@ -1,10 +1,10 @@
 # Centralize instantiation of dual methods. Useful in particular since the different
 # method classes have slightly different instantiation parameters.
 
-from nsopy.methods.subgradient_methods import SubgradientMethod
-from nsopy.methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
-from nsopy.methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from nsopy.methods.bundle_methods import CuttingPlanesMethod, BundleMethod
+from nsopy.subgradient_methods import SubgradientMethod
+from nsopy.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
+from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
+from nsopy.bundle_methods import CuttingPlanesMethod, BundleMethod
 
 AVAILABLE_METHODS = (
     'SG 1/k',
@@ -53,7 +53,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
     #############
     elif method == 'UPGM':
         if param == 0:
-            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            from nsopy.universal_gradient_methods import UGM_DEFAULT_EPSILON
             epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
@@ -64,7 +64,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
                             epsilon=epsilon)
     elif method == 'UDGM':
         if param == 0:
-            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            from nsopy.universal_gradient_methods import UGM_DEFAULT_EPSILON
             epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
@@ -75,7 +75,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
                             epsilon=epsilon)
     elif method == 'UFGM':
         if param == 0:
-            from methods.universal_gradient_methods import UGM_DEFAULT_EPSILON
+            from nsopy.universal_gradient_methods import UGM_DEFAULT_EPSILON
             epsilon = UGM_DEFAULT_EPSILON
         else:
             epsilon = param
@@ -89,7 +89,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
     #####################
     elif method == 'DSA':
         if param == 0:
-            from methods.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
+            from nsopy.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
             gamma = METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
         else:
             gamma = param
@@ -99,7 +99,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
                                         gamma=gamma)
     elif method == 'TA 1':
         if param == 0:
-            from methods.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
+            from nsopy.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
             gamma = METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
         else:
             gamma = param
@@ -110,7 +110,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
                                   gamma=gamma)
     elif method == 'TA 2':
         if param == 0:
-            from methods.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
+            from nsopy.quasi_monotone_subgradient_methods import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
             gamma = METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
         else:
             gamma = param
@@ -125,7 +125,7 @@ def DualMethodsFactory(inner_problem, method, param=0):
     elif method == 'CP':
         print('Cutting Planes instantiated. Remember to call method.set_dual_domain().')
         if param == 0:
-            from methods.bundle_methods import DEFAULT_EPSILON
+            from nsopy.bundle_methods import DEFAULT_EPSILON
             epsilon = DEFAULT_EPSILON
         else:
             epsilon = param
@@ -137,13 +137,13 @@ def DualMethodsFactory(inner_problem, method, param=0):
     elif method == 'bundle':
         print('Bundle Method instantiated. Remember to call method.set_dual_domain().')
         if param == 0:
-            from methods.bundle_methods import DEFAULT_EPSILON
+            from nsopy.bundle_methods import DEFAULT_EPSILON
             epsilon = DEFAULT_EPSILON
         else:
             epsilon = param
 
         # We use the default value for mu
-        from methods.bundle_methods import DEFAULT_MU
+        from nsopy.bundle_methods import DEFAULT_MU
         return BundleMethod(inner_problem.oracle,
                             inner_problem.projection_function,
                             dimension=inner_problem.dimension,

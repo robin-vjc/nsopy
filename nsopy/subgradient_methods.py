@@ -1,10 +1,10 @@
 # Classes incorporating the dual subgradient methods implemented in this package.
-# New methods (and corresponding loggers) can be added by following the templates TemplateMethod, TemplateMethodLogger.
+# New nsopy (and corresponding loggers) can be added by following the templates TemplateMethod, TemplateMethodLogger.
 
 from __future__ import print_function
 from __future__ import division
-from nsopy.methods.method_loggers import Observable
-from nsopy.methods.base import DualMethod
+from nsopy.method_loggers import Observable
+from nsopy.base import DualMethod
 import numpy as np
 
 

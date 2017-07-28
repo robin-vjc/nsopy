@@ -141,7 +141,7 @@ class SecondAnalyticalExampleInnerProblem(object):
 
 class ConstrainedDualAnalyticalExampleInnerProblem(object):
     """
-    This example tests whether methods can cope correctly with constrained dual sets.
+    This example tests whether nsopy can cope correctly with constrained dual sets.
 
     Consider problem
         min     -x1 + x2 - 0.5y

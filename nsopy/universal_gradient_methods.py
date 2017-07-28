@@ -6,8 +6,8 @@
 # Note: zeta(x,y) = ||y-x||^2_2 is used as the prox function, throughout.
 
 from __future__ import division
-from nsopy.methods.method_loggers import Observable
-from nsopy.methods.base import DualMethod
+from nsopy.method_loggers import Observable
+from nsopy.base import DualMethod
 import numpy as np
 import copy
 
@@ -35,7 +35,7 @@ class UniversalPGM(DualMethod, Observable):
     """
     def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False):
         """
-        Averaging: Nesterov's methods give guarantees on variables marked with a tilde. Those are supposed to be the
+        Averaging: Nesterov's nsopy give guarantees on variables marked with a tilde. Those are supposed to be the
         actual outputs of the method, but they require extra computations (evaluation of d(lambda_tilde)), and these can
         be carried out after the method has gone through all the required iterations. We therefore introduce the
         following additional attributed: lambda_hat_k and d_hat_k. These replace lambda_k and d_k.
