@@ -1,11 +1,11 @@
 # Methods available
-from .methods.subgradient_methods import SubgradientMethod
-from .methods.bundle_methods import CuttingPlanesMethod, BundleMethod
-from .methods.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from .methods.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
+from nsopy.subgradient_methods import SubgradientMethod
+from nsopy.bundle_methods import CuttingPlanesMethod, BundleMethod
+from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging, SGMDoubleSimpleAveragingEntropy
+from nsopy.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
 
-from .methods.methods_factory import DualMethodsFactory, AVAILABLE_METHODS
+from nsopy.methods_factory import DualMethodsFactory, AVAILABLE_METHODS
 
 # Loggers Available
-from .methods.method_loggers import GenericDualMethodLogger, SlimDualMethodLogger, EnhancedDualMethodLogger
-from .methods.method_loggers import DualDgmFgmMethodLogger
+from nsopy.loggers import GenericDualMethodLogger, SlimDualMethodLogger, EnhancedDualMethodLogger
+from nsopy.loggers import DualDgmFgmMethodLogger

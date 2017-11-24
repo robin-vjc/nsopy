@@ -4,18 +4,18 @@
 # Implementation based on
 # [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
 # pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
-# copy of the pdf in "./methods/doc/"
+# copy of the pdf in "./nsopy_base/doc/"
 
 from __future__ import print_function
 from __future__ import division
-from nsopy.methods.method_loggers import Observable
-from nsopy.methods.base import DualMethod
+from .loggers import Observable
+from .base import DualMethod
 import numpy as np
 import copy
 try:
     import gurobipy as gb
 except ImportError:
-    print('Gurobi required for Cutting Planes and Bundle methods.')
+    print('Gurobi required for Cutting Planes and Bundle nsopy.')
 
 
 DEFAULT_EPSILON = 0.01

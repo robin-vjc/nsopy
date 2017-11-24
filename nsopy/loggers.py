@@ -47,7 +47,7 @@ class TemplateMethodLogger(Observer):
 
 class GenericDualMethodLogger(Observer):
     """
-    Works with all implemented dual methods, and logs only variables that are common across all
+    Works with all implemented dual nsopy, and logs only variables that are common across all
     of them (lambda_k, d_k, etc)
     """
     def __init__(self, dual_method):
