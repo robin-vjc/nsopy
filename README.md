@@ -59,5 +59,4 @@ evaluating the first order oracle.
 
 ### Contributing
 
-Contributions and pull requests are very much welcome. 
-The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
+Contributions and pull requests are very much welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
