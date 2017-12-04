@@ -14,7 +14,7 @@ REQUIRES = [
 
 setup(
     name='nsopy',
-    version='1.0',
+    version='1.21',
     description='Non-smooth optimization for Python',
     author='Robin Vujanic',
     author_email='vjc.robin@gmail.com',
