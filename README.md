@@ -17,7 +17,6 @@ when
 
 
 * How to get [approximate solutions to structured MILPs](./notebooks/ApplicationToDuality.ipynb) using Lagrangian duality.
-
 <p align="center">
   <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
