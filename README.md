@@ -2,60 +2,34 @@
 
 A set of first-order methods for solving
 
-![optimization problem](notebooks/img/min_opt.png "Non-Smooth Optimization Program")
+![optimization problem](./notebooks/img/min_opt.png "Non-Smooth Optimization Program")
 
 when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
-* the set ![X](notebooks/img/XR.png) is convex.
+* the set ![X](./notebooks/img/XR.png) is convex.
 
-See the [basic analytical example](notebooks/Analytical Example.ipynb) for a complete working setup. 
+## Usage Examples
 
-**Requirements and Important Remarks:**
-* A first-order oracle for the problem is needed. For a given point x, such an oracle returns the objective 
-function value and a valid subgradient; on constrained problems, we also need a valid projection function onto 
-![X](notebooks/img/XR.png). 
-* Generally, we expect this projection operation to be computationally inexpensive, 
-[here is a list of important examples](notebooks/img/simple_projections.png) for which this is the case.
-
-* Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
-be still useful for quick comparisons or for applications in which the main computational burden is in
-evaluating the first order oracle.
-* The methods solve the equivalent problem of *maximizing* a concave (non-smooth) function. This is because the main application intended is to 
-solve dual problems of minimizations, which naturally arise as maximizations. 
-See [basic example on duality](notebooks/Application to Duality.ipynb).
-
-#### Why is this an important class of problems?
-
-There are several practical contexts in which non-smooth convex optimization programs arise. 
-One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
-take advantage of ``structure'' within difficult optimization programs. 
-[Here](notebooks/Application to Duality.ipynb) is quick intro on Lagrangian duality; 
-see further below for [more advance applications](#Advanced Applications).
-
-### Basic Usage Examples
-
-* [Simple Analyitical Example](notebooks/Analytical Example.ipynb).
-
+* See the [basic analytical example](./notebooks/Analytical Example.ipynb) for a complete working setup.
 <p align="center">
-  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="50%" href="#"/>
+  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="30%" href="#"/>
 </p>
 
-* [Lagriangian Duality](notebooks/Application to Duality.ipynb). Taking advantage of duality to simplify hard problems. 
-Applied to the following Mixed-Integer Linear Program (MILP):
+* Approximate solutions to MILPs using [Lagriangian Duality](./notebooks/Application to Duality.ipynb).
 
 <p align="center">
   <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
+and the more advanced applications
 
-### Advanced Applications
-
-* [Decomposition of Stochastic Multistage Integer Programs](https://github.com/robin-vjc/nsopy-stoch).
+* Example performing [decomposition of stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch).
 <p align="center">
-  <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="60%" href="#"/>
+  <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="30%" href="#"/>
 </p>
 
 * Computer Vision (Distributed Computations of Markov Random Fields)
+
 
 #### Implemented Methods
 
@@ -67,6 +41,25 @@ Applied to the following Mixed-Integer Linear Program (MILP):
 
 **Note**: Cutting Panes and Bundle methods require Gurobi (and the python package ``gurobipy``) to be installed. 
 If you are an academic, you can get a free license [here](http://www.gurobi.com/academia/for-universities]). 
+
+**Requirements and Important Remarks:**
+
+* The first-order oracle must also provide a projection function; [here is a list of cases](notebooks/img/simple_projections.png) for which 
+projection is computationally inexpensive.
+
+* Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
+be still useful for quick comparisons or for applications in which the main computational burden is in
+evaluating the first order oracle.
+
+
+#### Why is this an important class of problems?
+
+There are several practical contexts in which non-smooth convex optimization programs arise. 
+One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
+take advantage of ``structure'' within difficult optimization programs. 
+[Here](notebooks/Application to Duality.ipynb) is quick intro on Lagrangian duality; 
+see further below for [more advance applications](#Advanced Applications).
+
 
 ### Contributing
 

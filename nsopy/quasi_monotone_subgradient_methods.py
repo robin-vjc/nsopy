@@ -34,6 +34,7 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
 
         self.lambda_k = np.zeros(self.dimension, dtype=float)
         self.x_k = 0
+        self.d_k = 0
 
         self.gamma = gamma
         self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
@@ -82,6 +83,7 @@ class SGMDoubleSimpleAveragingEntropy(DualMethod, Observable):
 
         self.lambda_k = np.zeros(self.dimension, dtype=float)
         self.x_k = 0
+        self.d_k = 0
 
         self.gamma = gamma
         self.R = R
@@ -97,11 +99,11 @@ class SGMDoubleSimpleAveragingEntropy(DualMethod, Observable):
         self.notify_observers()  # placed here to avoid mismatch between lambda_k and d_k
 
         self.s_k += self.diff_d_k
-        lambda_k_plus = float(1.0)/float(self.gamma*np.sqrt(self.iteration_number+1)) * self.s_k
+        mu_k = float(self.R)/float(self.gamma*np.sqrt(self.iteration_number+1))
+        lambda_k_plus = 1/mu_k * self.s_k
         lambda_k_plus = self.softmax_projection_function(lambda_k_plus)
 
-        self.lambda_k = float(self.iteration_number+1)/float(self.iteration_number+2)*self.lambda_k \
-                        + float(1.0)/float(self.iteration_number+2)*lambda_k_plus
+        self.lambda_k = self.R*(lambda_k_plus - 1)
 
         self.iteration_number += 1
         # self.notify_observers()
