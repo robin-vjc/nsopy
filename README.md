@@ -6,22 +6,22 @@ A set of first-order methods for solving
 
 when
 * f(x) is convex, but not necessarily differentiable (has "kinks")
-* the set ![X](./notebooks/img/XR.png) is convex.
+* the set ![X](./notebooks/img/XR.png) is convex
 
 ## Usage Examples
 
 * See the [basic analytical example](./notebooks/AnalyticalExample.ipynb) for a complete working setup.
 <p align="center">
-  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="30%" href="#"/>
+  <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
 </p>
 
-* How to get approximate solutions to structured MILPs using [Lagriangian Duality](./notebooks/Application to Duality.ipynb).
+* How to get [approximate solutions to structured MILPs](./notebooks/ApplicationToDuality.ipynb) using Lagriangian duality.
 
 <p align="center">
   <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
-* Example showing how to [decompose stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch).
+* How to [decompose stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch) to allow distributed computations.
 <p align="center">
   <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="30%" href="#"/>
 </p>
