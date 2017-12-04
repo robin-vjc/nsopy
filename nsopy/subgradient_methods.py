@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 from __future__ import division
-from nsopy.loggers import Observable
+from nsopy.method_loggers import Observable
 from nsopy.base import DualMethod
 import numpy as np
 

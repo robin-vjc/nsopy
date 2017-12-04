@@ -1,9 +1,9 @@
 from __future__ import print_function
 
 import numpy as np
-from nsopy.loggers import GenericDualMethodLogger
+from nsopy.method_loggers import GenericDualMethodLogger
 from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
+from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
 
 
 def test_DSA_on_analytical_example():

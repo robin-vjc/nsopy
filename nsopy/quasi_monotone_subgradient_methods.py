@@ -4,7 +4,7 @@
 # http://link.springer.com/article/10.1007/s10957-014-0677-5
 
 from __future__ import division
-from nsopy.loggers import Observable
+from nsopy.method_loggers import Observable
 from nsopy.base import DualMethod
 import numpy as np
 import copy
@@ -34,7 +34,6 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
 
         self.lambda_k = np.zeros(self.dimension, dtype=float)
         self.x_k = 0
-        self.d_k = 0
 
         self.gamma = gamma
         self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
@@ -107,6 +106,7 @@ class SGMDoubleSimpleAveragingEntropy(DualMethod, Observable):
 
         self.iteration_number += 1
         # self.notify_observers()
+
 
 
 # Implementation of "Subgradient Method with Triple Averaging", p.930.

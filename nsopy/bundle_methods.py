@@ -4,12 +4,12 @@
 # Implementation based on
 # [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
 # pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
-# copy of the pdf in "./nsopy_base/doc/"
+# copy of the pdf in "./nsopy/doc/"
 
 from __future__ import print_function
 from __future__ import division
-from .loggers import Observable
-from .base import DualMethod
+from nsopy.method_loggers import Observable
+from nsopy.base import DualMethod
 import numpy as np
 import copy
 try:

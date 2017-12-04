@@ -1,9 +1,9 @@
 from __future__ import print_function
 
 import numpy as np
-from nsopy.loggers import GenericDualMethodLogger, DualDgmFgmMethodLogger
+from nsopy.method_loggers import GenericDualMethodLogger, DualDgmFgmMethodLogger
 from nsopy.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
-from analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
 #############
