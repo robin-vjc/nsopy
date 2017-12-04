@@ -15,18 +15,17 @@ when
   <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
 </p>
 
+
 * How to get [approximate solutions to structured MILPs](./notebooks/ApplicationToDuality.ipynb) using Lagriangian duality.
 
 <p align="center">
   <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
-* How to [decompose stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch) to allow distributed computations.
-<p align="center">
-  <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="30%" href="#"/>
-</p>
 
-* Computer Vision (Distributed Computations of Markov Random Fields)
+We can also use these methods to decomposte stochastic multistage 
+mixed integer programs ([preview](https://github.com/robin-vjc/nsopy-stoch)), which in turn allows 
+the computation of approximate solutions on distributed machines (e.g., on cloud infrastructure).
 
 
 #### Currently Implemented Methods

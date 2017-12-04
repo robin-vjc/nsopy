@@ -4,8 +4,10 @@
 - config __init__.py such that you can do ``from nsopy import UniversalPGM''
 
 # Harder / New features
+- add in MRF example application
 - think about an example for structured mrf (not multiple choice)
 - create wrapper nsoSolver(method='upgm', stopping=..., )
 - use cutting planes or yosida to get a stopping criterion for ALL methods
 - replace CP and BDL gurobi dependency with open source alternative?
 - works on python 3? travis..
+- more test cases
