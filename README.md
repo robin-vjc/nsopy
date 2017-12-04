@@ -10,7 +10,7 @@ when
 
 ## Usage Examples
 
-* See the [basic analytical example](./notebooks/Analytical Example.ipynb) for a complete working setup.
+* See the [basic analytical example](./notebooks/AnalyticalExample.ipynb) for a complete working setup.
 <p align="center">
   <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="30%" href="#"/>
 </p>
