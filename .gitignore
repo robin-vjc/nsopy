@@ -8,4 +8,4 @@ gen
 *.csv
 *.log
 notebooks/.ipynb_checkpoints
-.nsopy.egg-info
+nsopy.egg-info/*
