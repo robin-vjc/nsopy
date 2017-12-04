@@ -29,9 +29,13 @@ the computation of approximate solutions to these models on distributed machines
 
 ## Installation
 
+The package is pip-installable:
+
 ```
 pip install nsopy
 ```
+
+Usage examples as above. Test cases for ```py.test``` runner are in ```./nsopy/tests/```.
 
 ## Currently Implemented Methods
 

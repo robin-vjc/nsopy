@@ -3,6 +3,7 @@
 - explain how to use loggers and util to record as csv (utils)
 - DONE config __init__.py such that you can do ``from nsopy import UniversalPGM''
 - we currently implement max (so we have to supply negative of gradient when we want to min) should probably be fixed (e.g. using adapters)
+- more explanations on how to handle equality vs inequality constraints in the basic examples
 
 # Harder / New features
 - add in MRF example application
