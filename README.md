@@ -25,7 +25,7 @@ when
 
 We can also use these methods to decomposte stochastic multistage 
 mixed integer programs ([preview](https://github.com/robin-vjc/nsopy-stoch)), which in turn allows 
-the computation of approximate solutions to these models on distributed machines (e.g., on cloud infrastructure).
+the computation of approximate solutions to these models on distributed environments (e.g., on cloud infrastructure).
 
 ## Installation
 
