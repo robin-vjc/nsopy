@@ -1,7 +1,8 @@
 # Easy
 - test coverage badge
 - explain how to use loggers and util to record as csv (utils)
-- config __init__.py such that you can do ``from nsopy import UniversalPGM''
+- DONE config __init__.py such that you can do ``from nsopy import UniversalPGM''
+- we currently implement max (so we have to supply negative of gradient when we want to min) should probably be fixed (e.g. using adapters)
 
 # Harder / New features
 - add in MRF example application
@@ -11,3 +12,4 @@
 - replace CP and BDL gurobi dependency with open source alternative?
 - works on python 3? travis..
 - more test cases
+

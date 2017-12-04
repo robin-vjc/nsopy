@@ -25,10 +25,15 @@ when
 
 We can also use these methods to decomposte stochastic multistage 
 mixed integer programs ([preview](https://github.com/robin-vjc/nsopy-stoch)), which in turn allows 
-the computation of approximate solutions on distributed machines (e.g., on cloud infrastructure).
+the computation of approximate solutions to these models on distributed machines (e.g., on cloud infrastructure).
 
+## Installation
 
-#### Currently Implemented Methods
+```
+pip install nsopy
+```
+
+## Currently Implemented Methods
 
 * standard subgradient method, with constant and 1/k decaying stepsize
 * cutting planes (*requires Gurobi*)
@@ -51,4 +56,5 @@ evaluating the first order oracle.
 
 ### Contributing
 
-Pull requests are very welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
+Contributions and pull requests are very much welcome. 
+The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
