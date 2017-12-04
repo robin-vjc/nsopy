@@ -34,8 +34,8 @@ when
 * standard subgradient method, with constant and 1/k decaying stepsize
 * cutting planes (*requires Gurobi*)
 * a basic variant of the bundle method (*requires Gurobi*)
-* 2x [quasi-monotone methods](http://link.springer.com/article/10.1007/s10957-014-0677-5) (DSA and TA)
-* 3x [universal gradient methods](http://link.springer.com/article/10.1007/s10107-014-0790-0) (UPGM, UDGM and UFGM)
+* [Nesterov] DSA and TA [quasi-monotone methods](http://link.springer.com/article/10.1007/s10957-014-0677-5) 
+* [Nesterov] PGM, DGM and FGM, [universal gradient methods](http://link.springer.com/article/10.1007/s10107-014-0790-0)
 
 **Note**: Cutting Panes and Bundle methods require Gurobi (and the python package ``gurobipy``) to be installed. 
 If you are an academic, you can get a free license [here](http://www.gurobi.com/academia/for-universities]). 
