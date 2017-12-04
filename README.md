@@ -15,15 +15,13 @@ when
   <img src="./notebooks/img/solved_ex_1.png" alt="Example" width="30%" href="#"/>
 </p>
 
-* Approximate solutions to MILPs using [Lagriangian Duality](./notebooks/Application to Duality.ipynb).
+* How to get approximate solutions to structured MILPs using [Lagriangian Duality](./notebooks/Application to Duality.ipynb).
 
 <p align="center">
   <img src="./notebooks/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
-and the more advanced applications
-
-* Example performing [decomposition of stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch).
+* Example showing how to [decompose stochastic multistage mixed integer programs](https://github.com/robin-vjc/nsopy-stoch).
 <p align="center">
   <img src="./notebooks/img/stoch_tree.png" alt="Scenarios Tree" width="30%" href="#"/>
 </p>
@@ -31,7 +29,7 @@ and the more advanced applications
 * Computer Vision (Distributed Computations of Markov Random Fields)
 
 
-#### Implemented Methods
+#### Currently Implemented Methods
 
 * standard subgradient method, with constant and 1/k decaying stepsize
 * cutting planes (*requires Gurobi*)
@@ -50,15 +48,6 @@ projection is computationally inexpensive.
 * Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
 be still useful for quick comparisons or for applications in which the main computational burden is in
 evaluating the first order oracle.
-
-
-#### Why is this an important class of problems?
-
-There are several practical contexts in which non-smooth convex optimization programs arise. 
-One such context is the lagrangian duality framework. Duality is an approach frequently used to systematically 
-take advantage of ``structure'' within difficult optimization programs. 
-[Here](notebooks/Application to Duality.ipynb) is quick intro on Lagrangian duality; 
-see further below for [more advance applications](#Advanced Applications).
 
 
 ### Contributing
