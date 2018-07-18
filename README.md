@@ -5,8 +5,19 @@ A set of first-order methods for solving
 ![optimization problem](./notebooks/img/min_opt.png "Non-Smooth Optimization Program")
 
 when
-* f(x) is convex, but not necessarily differentiable (has "kinks")
+* f(x) is convex, but not necessarily differentiable
 * the set ![X](./notebooks/img/XR.png) is convex
+
+## Installation
+
+The package is pip-installable:
+
+```
+pip install nsopy
+```
+
+Usage examples as above. Test cases for ```py.test``` runner are in ```./nsopy/tests/```.
+
 
 ## Usage Examples
 
@@ -22,19 +33,10 @@ when
 </p>
 
 
-We can also use these methods to decomposte stochastic multistage 
+We can also use these methods to decompose stochastic multistage 
 mixed integer programs ([preview](https://github.com/robin-vjc/nsopy-stoch)), which in turn allows 
 the computation of approximate solutions to these models on distributed environments (e.g., on cloud infrastructure).
 
-## Installation
-
-The package is pip-installable:
-
-```
-pip install nsopy
-```
-
-Usage examples as above. Test cases for ```py.test``` runner are in ```./nsopy/tests/```.
 
 ## Currently Implemented Methods
 
@@ -59,4 +61,19 @@ evaluating the first order oracle.
 
 ### Contributing
 
-Contributions and pull requests are very much welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful. 
+Contributions and pull requests are very much welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful.
+
+## Cite
+
+~~~~
+@article{Vujanic2018,
+	title={Dual Decomposition of Stochastic Integer Programs: New Results and Experimental Comparison of Solution Methods},
+	author={Vujanic, Robin and Esfahani, Peyman Mohajerin},
+	journal={TO BE COMPLETED},
+	volume={TO BE COMPLETED},
+	number={TO BE COMPLETED},
+	pages={TO BE COMPLETED},
+	year={2018},
+	publisher={TO BE COMPLETED}
+}
+~~~~ 

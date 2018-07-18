@@ -1,5 +1,5 @@
 from nsopy.bundle_methods import BundleMethod, CuttingPlanesMethod
-from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging, SGMDoubleSimpleAveragingEntropy
+from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
 from nsopy.subgradient_methods import SubgradientMethod
 from nsopy.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
 from nsopy.method_loggers import GenericDualMethodLogger

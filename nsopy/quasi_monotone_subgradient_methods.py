@@ -10,7 +10,7 @@ import numpy as np
 import copy
 
 METHOD_QUASI_MONOTONE_DEFAULT_GAMMA = 1.0
-
+LARGE_VAL = 10000
 
 # Implementation of "Subgradient Method with Double Simple Averaging", p.928.
 class SGMDoubleSimpleAveraging(DualMethod, Observable):
@@ -33,7 +33,9 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
             self.lambda_k = self.projection_function(np.zeros(self.dimension, dtype=float))
 
         self.lambda_k = np.zeros(self.dimension, dtype=float)
-        self.x_k = 0
+        self.x_k = None
+        self.diff_d_k = None
+        self.d_k = -np.infty
 
         self.gamma = gamma
         self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
@@ -58,55 +60,53 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
         # self.notify_observers()
 
 
-LARGE_VAL = 10000
-
-class SGMDoubleSimpleAveragingEntropy(DualMethod, Observable):
-    # Variation of DSA with Entropy prox term.
-    """ Implementation of a dual method """
-    def __init__(self, oracle, softmax_projection_function, dimension=0, R=LARGE_VAL, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
-        super(SGMDoubleSimpleAveragingEntropy, self).__init__()
-
-        self.desc = 'DSA Entropy, $\gamma = {}$'.format(gamma)
-        self.oracle = oracle
-        self.softmax_projection_function = softmax_projection_function
-
-        self.oracle_calls = 0
-        self.iteration_number = 0
-
-        if dimension == 0:
-            self.lambda_k = self.softmax_projection_function(0)
-            self.dimension = len(self.lambda_k)
-        else:
-            self.dimension = dimension
-            self.lambda_k = self.softmax_projection_function(np.zeros(self.dimension, dtype=float))
-
-        self.lambda_k = np.zeros(self.dimension, dtype=float)
-        self.x_k = 0
-        self.d_k = 0
-
-        self.gamma = gamma
-        self.R = R
-        self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
-
-        # for record keeping
-        self.method_name = 'DSA-Entropy'
-        self.parameter = gamma
-
-    def dual_step(self):
-        self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
-        self.oracle_calls += 1
-        self.notify_observers()  # placed here to avoid mismatch between lambda_k and d_k
-
-        self.s_k += self.diff_d_k
-        mu_k = float(self.R)/float(self.gamma*np.sqrt(self.iteration_number+1))
-        lambda_k_plus = 1/mu_k * self.s_k
-        lambda_k_plus = self.softmax_projection_function(lambda_k_plus)
-
-        self.lambda_k = self.R*(lambda_k_plus - 1)
-
-        self.iteration_number += 1
-        # self.notify_observers()
-
+# class SGMDoubleSimpleAveragingEntropy(DualMethod, Observable):
+#     # Variation of DSA with Entropy prox term.
+#     """ Implementation of a dual method """
+#     def __init__(self, oracle, softmax_projection_function, dimension=0, SR=LARGE_VAL, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
+#         super(SGMDoubleSimpleAveragingEntropy, self).__init__()
+#
+#         self.desc = 'DSA Entropy, $\gamma = {}$'.format(gamma)
+#         self.oracle = oracle
+#         self.softmax_projection_function = softmax_projection_function
+#
+#         self.oracle_calls = 0
+#         self.iteration_number = 0
+#
+#         if dimension == 0:
+#             self.lambda_k = self.softmax_projection_function(0)
+#             self.dimension = len(self.lambda_k)
+#         else:
+#             self.dimension = dimension
+#             self.lambda_k = self.softmax_projection_function(np.zeros(self.dimension, dtype=float))
+#
+#         self.lambda_k = np.zeros(self.dimension, dtype=float)
+#         self.x_k = None
+#         self.diff_d_k = None
+#         self.d_k = -np.infty
+#
+#         self.gamma = gamma
+#         self.SR = SR
+#         self.s_k = np.zeros(self.dimension, dtype=float)  # this stores \sum_{k=0}^t diff_d_k
+#
+#         # for record keeping
+#         self.method_name = 'DSA-Entropy'
+#         self.parameter = gamma
+#
+#     def dual_step(self):
+#         self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
+#         self.oracle_calls += 1
+#         self.notify_observers()  # placed here to avoid mismatch between lambda_k and d_k
+#
+#         self.s_k += self.diff_d_k
+#         mu_k = float(self.SR) / float(self.gamma * np.sqrt(self.iteration_number + 1))
+#         psi_k_plus = mu_k * self.s_k
+#         lambda_k_plus = self.softmax_projection_function(psi_k_plus)
+#
+#         self.lambda_k = float(self.iteration_number+1)/float(self.iteration_number+2)*self.lambda_k \
+#                         + float(1.0)/float(self.iteration_number+2)*lambda_k_plus
+#         self.iteration_number += 1
+#         # self.notify_observers()
 
 
 # Implementation of "Subgradient Method with Triple Averaging", p.930.
