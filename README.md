@@ -23,7 +23,7 @@ Optional: tests are in ```./nsopy/tests/``` and can be run with the ```py.test``
 
 We want to minimize the non-differentiable function obtained by taking the `max` over a set of functions:
 <p align="center">
-  <img src="./img/basic_example.png" alt="Example" width="50%" href="#"/>
+  <img src="./img/basic_example.png" alt="Example" width="65%" href="#"/>
 </p>
 
 It is straightforward to see that the optimum is at `x* = 2.25`; we can solve this optimization problem numerically as follows:
