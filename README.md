@@ -16,7 +16,7 @@ The package is pip-installable:
 >>> pip install nsopy
 ```
 
-Optional: tests are in ```./nsopy/tests/``` and can be run with ```py.test``` test runner.
+Optional: tests are in ```./nsopy/tests/``` and can be run with the ```py.test``` test runner.
 
 
 ## Basic Usage Example
@@ -127,7 +127,7 @@ evaluating the first order oracle.
 
 ## Advanced Examples
 
-* See [analytical example](./notebooks/AnalyticalExample.ipynb) for a more challenging instance of model to optimize.
+* See [analytical example](./notebooks/AnalyticalExample.ipynb) for a more challenging optimization model.
 <p align="center">
   <img src="./img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
 </p>
