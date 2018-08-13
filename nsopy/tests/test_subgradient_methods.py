@@ -19,6 +19,7 @@ def test_templates():
 
     assert logger.x_iterates == [1, 2, 3]
 
+
 def mock_one_dim_oracle(lambda_k):
     x_k = 1.1
     d_k = 1.2
@@ -29,6 +30,7 @@ def mock_one_dim_oracle(lambda_k):
 
 def mock_projection_function(lambda_k):
     return lambda_k
+
 
 def test_subgradient_method_sanity_checks():
     print('# Test Subgradient Method Sanity')

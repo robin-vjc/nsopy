@@ -3,6 +3,15 @@ import pandas as pd
 from ast import literal_eval
 
 
+def invert_oracle_sense(oracle):
+    def inverted_oracle(lambda_k):
+        x_k, d_k, diff_d_k = oracle(lambda_k)
+
+        return x_k, -d_k, -diff_d_k
+
+    return inverted_oracle
+
+
 def record_logger(logger, filename=r'logger_record.csv'):
     """ Records the information contained in a method logger into a csv. """
     inner_problem = logger.method.oracle.im_self

@@ -7,9 +7,11 @@
 
 from __future__ import division
 from nsopy.method_loggers import Observable
-from nsopy.base import DualMethod
+from nsopy.base import SolutionMethod
 import numpy as np
 import copy
+
+from nsopy.utils import invert_oracle_sense
 
 UGM_DEFAULT_EPSILON = 1.0
 UGM_DEFAULT_L_0 = 1.1
@@ -27,13 +29,13 @@ def _bregman_map(M, lambda_k, diff_d_k):
 # UNIVERSAL PRIMAL GRADIENT METHOD #
 ####################################
 
-class UniversalPGM(DualMethod, Observable):
+class UniversalPGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (2.16) in [1], the Universal Primal Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
         """
         Averaging: Nesterov's nsopy give guarantees on variables marked with a tilde. Those are supposed to be the
         actual outputs of the method, but they require extra computations (evaluation of d(lambda_tilde)), and these can
@@ -52,6 +54,12 @@ class UniversalPGM(DualMethod, Observable):
 
         self.desc = 'UPGM, $\epsilon = {}$'.format(epsilon)
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.iteration_number = 1
@@ -192,18 +200,24 @@ class UniversalPGM(DualMethod, Observable):
 # UNIVERSAL DUAL GRADIENT METHOD #
 ##################################
 
-class UniversalDGM(DualMethod, Observable):
+class UniversalDGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (3.2) in [1], the Universal Dual Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
         super(UniversalDGM, self).__init__()
 
         self.desc = 'UDGM, $\epsilon = {}$'.format(epsilon)
 
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.iteration_number = 1
@@ -355,18 +369,24 @@ class UniversalDGM(DualMethod, Observable):
 # UNIVERSAL FAST GRADIENT METHOD #
 ##################################
 
-class UniversalFGM(DualMethod, Observable):
+class UniversalFGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (4.1) in [1], the Universal Fast Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
         super(UniversalFGM, self).__init__()
 
         self.desc = 'UFGM, $\epsilon = {}$'.format(epsilon)
 
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.iteration_number = 1

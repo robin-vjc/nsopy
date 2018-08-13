@@ -6,6 +6,7 @@
 - more explanations on how to handle equality vs inequality constraints in the basic examples
 
 # Harder / New features
+- the default should probably be 'min' not 'max'
 - add in MRF example application
 - think about an example for structured mrf (not multiple choice)
 - create wrapper nsoSolver(method='upgm', stopping=..., )
@@ -13,4 +14,3 @@
 - replace CP and BDL gurobi dependency with open source alternative?
 - works on python 3? travis..
 - more test cases
-

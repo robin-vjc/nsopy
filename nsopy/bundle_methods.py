@@ -9,9 +9,12 @@
 from __future__ import print_function
 from __future__ import division
 from nsopy.method_loggers import Observable
-from nsopy.base import DualMethod
+from nsopy.base import SolutionMethod
 import numpy as np
 import copy
+
+from nsopy.utils import invert_oracle_sense
+
 try:
     import gurobipy as gb
 except ImportError:
@@ -24,16 +27,22 @@ SEARCH_BOX_MIN = -10
 SEARCH_BOX_MAX = 10
 
 
-class CuttingPlanesMethod(DualMethod, Observable):
+class CuttingPlanesMethod(SolutionMethod, Observable):
     """
     Implementation of Algorithm (CP) in [1], p.19.
     """
 
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MAX, search_box_max=SEARCH_BOX_MAX, sense='max'):
         super(CuttingPlanesMethod, self).__init__()
         self.desc = 'Cutting Planes, $\epsilon = {}$'.format(epsilon)
 
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.iteration_number = 1
@@ -54,12 +63,11 @@ class CuttingPlanesMethod(DualMethod, Observable):
 
         # Step 1
         # search box C
-        self.lambda_min = SEARCH_BOX_MIN
-        self.lambda_max = SEARCH_BOX_MAX
+        self.lambda_min = search_box_min
+        self.lambda_max = search_box_max
         # initial function value
         self.f_hat_lambda_k = -np.infty
         self.bundle = []
-
 
         # --------------------------------------------------- #
         # Initialize LP model of cutting plane
@@ -167,17 +175,23 @@ class CuttingPlanesMethod(DualMethod, Observable):
         self.bundle_model.update()
 
 
-class BundleMethod(DualMethod, Observable):
+class BundleMethod(SolutionMethod, Observable):
     """
     Implementation of Bundle Method, based on my paper, as adapted from algorithm (BA) in [1],
     p.21 and Algorithm 7.3 in [2], p.374 (for the constrained dual case).
     """
 
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU, sense='max'):
         super(BundleMethod, self).__init__()
         self.desc = 'Bundle Method, $\epsilon = {}, \mu = {}$'.format(epsilon, mu)
 
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.iteration_number = 1

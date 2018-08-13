@@ -45,6 +45,25 @@ class TemplateMethodLogger(Observer):
         self.x_iterates.append(self.method.x)
 
 
+class GenericMethodLogger(Observer):
+    """
+    Works with all implemented dual nsopy, and logs only variables that are common across all
+    of them (lambda_k, d_k, etc)
+    """
+    def __init__(self, dual_method):
+        # we get a reference to the method we are supposed to
+        self.method = dual_method
+        # we need to register the logger with the observable, so we get the notifications
+        self.method.register_observer(self)
+        self.x_k_iterates = []
+        self.f_k_iterates = []
+
+    def update(self):
+        # what we do when method sends updates
+        self.x_k_iterates.append(copy.copy(self.method.lambda_k))
+        self.f_k_iterates.append(copy.copy(self.method.d_k))
+
+
 class GenericDualMethodLogger(Observer):
     """
     Works with all implemented dual nsopy, and logs only variables that are common across all

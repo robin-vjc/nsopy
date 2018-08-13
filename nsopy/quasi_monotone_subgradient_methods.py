@@ -5,21 +5,30 @@
 
 from __future__ import division
 from nsopy.method_loggers import Observable
-from nsopy.base import DualMethod
+from nsopy.base import SolutionMethod
 import numpy as np
 import copy
+
+from nsopy.utils import invert_oracle_sense
 
 METHOD_QUASI_MONOTONE_DEFAULT_GAMMA = 1.0
 LARGE_VAL = 10000
 
+
 # Implementation of "Subgradient Method with Double Simple Averaging", p.928.
-class SGMDoubleSimpleAveraging(DualMethod, Observable):
+class SGMDoubleSimpleAveraging(SolutionMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, dimension=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
+    def __init__(self, oracle, projection_function, dimension=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='max'):
         super(SGMDoubleSimpleAveraging, self).__init__()
 
         self.desc = 'DSA, $\gamma = {}$'.format(gamma)
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.oracle_calls = 0
@@ -110,14 +119,20 @@ class SGMDoubleSimpleAveraging(DualMethod, Observable):
 
 
 # Implementation of "Subgradient Method with Triple Averaging", p.930.
-class SGMTripleAveraging(DualMethod, Observable):
+class SGMTripleAveraging(SolutionMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, dimension=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA):
+    def __init__(self, oracle, projection_function, dimension=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='max'):
         super(SGMTripleAveraging, self).__init__()
 
         self.desc = 'TA, $\gamma = {}$'.format(gamma)
 
         self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
 
         self.oracle_calls = 0

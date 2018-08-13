@@ -4,22 +4,30 @@
 from __future__ import print_function
 from __future__ import division
 from nsopy.method_loggers import Observable
-from nsopy.base import DualMethod
+from nsopy.base import SolutionMethod
 import numpy as np
 
 
 #######################
 # IMPLEMENTED METHODS #
 #######################
+from nsopy.utils import invert_oracle_sense
 
-class SubgradientMethod(DualMethod, Observable):
+
+class SubgradientMethod(SolutionMethod, Observable):
     """ Standard subgradient method """
-    def __init__(self, oracle, projection_function, dimension=0, stepsize_rule='1/k', stepsize_0=1.0):
+    def __init__(self, oracle, projection_function, dimension=0, stepsize_rule='1/k', stepsize_0=1.0, sense='max'):
         super(SubgradientMethod, self).__init__()
 
         self.desc = 'SG, $s_0 = {}$'.format(stepsize_0)
 
-        self.oracle = oracle
+        if sense == 'max':
+            self.oracle = oracle
+        elif sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)
+        else:
+            raise ValueError('Sense should be either "min" or "max"')
+
         self.projection_function = projection_function
         self.stepsize_rule = stepsize_rule
 
