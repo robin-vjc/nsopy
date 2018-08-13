@@ -49,7 +49,7 @@ def projection_function(x_k):
 ~~~~
 Instantiation of method and logger, solve and print
 ~~~~
-method = SubgradientMethod(oracle=oracle, projection_function=projection_function, stepsize_0=0.1, stepsize_rule='constant', sense='min')
+method = SubgradientMethod(oracle, projection_function, stepsize_0=0.1, stepsize_rule='constant', sense='min')
 logger = GenericMethodLogger(method)
 
 for iteration in range(200):
