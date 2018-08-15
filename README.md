@@ -21,20 +21,18 @@ Optional: tests are in ```./nsopy/tests/``` and can be run with the ```py.test``
 
 ## Basic Usage Example
 
-We want to minimize the non-differentiable function obtained by taking the `max` over a set of functions:
+We want to minimize a non-differentiable function obtained by taking the `max` over a set of functions. 
+The feasible set considered is the set of non-negative real numbers, i.e., ![Rplus](img/feas_set.png), 
+for which the projection operation is straightforward. 
 <p align="center">
   <img src="./img/basic_example.png" alt="Example" width="65%" href="#"/>
 </p>
 
 It is straightforward to see that the optimum is at `x* = 2.25`; we can solve this optimization problem numerically as follows:
 ~~~~
-from nsopy import SubgradientMethod
-from nsopy.method_loggers import GenericMethodLogger
-import numpy as np
-
 def oracle(x_k):
     # evaluation of the f_i components at x_k
-    fi_x_k = [-2*x_k + 2,  -1.0/3*x_k + 1, x_k - 2]
+    fi_x_k = [-2*x_k + 2,  -1.0/3*x_k + 1,  x_k - 2]
 
     f_x_k = max(fi_x_k)  # function value at x_k
 
@@ -45,7 +43,10 @@ def oracle(x_k):
     return 0, f_x_k, diff_f_xk
 
 def projection_function(x_k):
-    return x_k if x_k is not 0 else np.array([0,])
+    if x_k is 0:
+        return np.array([0,])
+    else:
+        return np.maximum(x_k, 0)
 ~~~~
 Instantiation of method and logger, solve and print
 ~~~~
@@ -57,9 +58,9 @@ for iteration in range(200):
 ~~~~
 Result:
 ~~~~
->>> print(logger.x_k_iterates[-1])
+>>> print(logger.x_k_iterates[-5:])
 
-[array([2.2]), array([2.21666667]), array([2.23333333]), array([2.25]), array([2.26666667])]
+[2.1999999999999904, 2.216666666666657, 2.2333333333333236, 2.2499999999999902, 2.266666666666657]
 ~~~~
 
 
@@ -116,6 +117,10 @@ BundleMethod(oracle, projection_function, epsilon=0.01, mu=0.5, sense='max'):
 
 
 ## Important Remarks
+
+* The basic usage example illustrates how the oracle can implement a special case to respond to an initial request with "x_k = 0", 
+when the solution method still doesn't know the dimension of x. Alternatively, methods can be instantiated with the argument `dimension`, 
+in which case the oracle doesn't need to implement a special case for 0.  
 
 * The first-order oracle must also provide a projection function; [here is a list of cases](img/simple_projections.png) for which 
 the projection operation is computationally inexpensive.

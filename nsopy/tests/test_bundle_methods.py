@@ -4,7 +4,7 @@ from nsopy.method_loggers import EnhancedDualMethodLogger
 from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
-##################
+##################`dimension
 # CUTTING PLANES #
 ##################
 
