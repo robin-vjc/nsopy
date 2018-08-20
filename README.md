@@ -4,7 +4,7 @@ A set of first-order methods for solving
 
 ![optimization problem](img/min_opt.png "Non-Smooth Optimization Program")
 
-when -- what if we actually tried to do $x = 1$ or $$x =1$$ ?
+when
 * f(x) is convex, but not necessarily differentiable
 * the set ![X](img/XR.png) is convex
 
@@ -22,7 +22,7 @@ Optional: tests are in ```./nsopy/tests/``` and can be run with the ```py.test``
 ## Basic Usage Example
 
 We want to minimize a non-differentiable function obtained by taking the `max` over a set of functions. 
-The feasible set considered is the set of non-negative real numbers, i.e., ![Rplus](img/feas_set.png), 
+The feasible set considered is the set of non-negative real numbers, i.e., <img src="https://latex.codecogs.com/svg.latex?\mathbb{X}&space;=&space;\mathbb{R}^&plus;" title="\mathbb{X} = \mathbb{R}^+"/>
 for which the projection operation is straightforward. 
 <p align="center">
   <img src="./img/basic_example.png" alt="Example" width="65%" href="#"/>
