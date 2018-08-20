@@ -18,15 +18,15 @@ LARGE_VAL = 10000
 # Implementation of "Subgradient Method with Double Simple Averaging", p.928.
 class SGMDoubleSimpleAveraging(SolutionMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, dimension=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='min'):
         super(SGMDoubleSimpleAveraging, self).__init__()
 
         self.desc = 'DSA, $\gamma = {}$'.format(gamma)
         self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model
+        elif sense == 'max':
             self.oracle = oracle
-        elif sense == 'min':
-            self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
@@ -121,16 +121,15 @@ class SGMDoubleSimpleAveraging(SolutionMethod, Observable):
 # Implementation of "Subgradient Method with Triple Averaging", p.930.
 class SGMTripleAveraging(SolutionMethod, Observable):
     """ Implementation of a dual method """
-    def __init__(self, oracle, projection_function, dimension=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, variant=1, gamma=METHOD_QUASI_MONOTONE_DEFAULT_GAMMA, sense='min'):
         super(SGMTripleAveraging, self).__init__()
 
         self.desc = 'TA, $\gamma = {}$'.format(gamma)
 
-        self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model
+        elif sense == 'max':
             self.oracle = oracle
-        elif sense == 'min':
-            self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function

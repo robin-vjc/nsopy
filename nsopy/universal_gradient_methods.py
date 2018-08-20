@@ -35,7 +35,7 @@ class UniversalPGM(SolutionMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         """
         Averaging: Nesterov's nsopy give guarantees on variables marked with a tilde. Those are supposed to be the
         actual outputs of the method, but they require extra computations (evaluation of d(lambda_tilde)), and these can
@@ -53,10 +53,9 @@ class UniversalPGM(SolutionMethod, Observable):
         super(UniversalPGM, self).__init__()
 
         self.desc = 'UPGM, $\epsilon = {}$'.format(epsilon)
-        self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
             self.oracle = oracle
-        elif sense == 'min':
+        elif sense == 'max':
             self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
@@ -206,15 +205,15 @@ class UniversalDGM(SolutionMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         super(UniversalDGM, self).__init__()
 
         self.desc = 'UDGM, $\epsilon = {}$'.format(epsilon)
 
         self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
             self.oracle = oracle
-        elif sense == 'min':
+        elif sense == 'max':
             self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
@@ -375,15 +374,15 @@ class UniversalFGM(SolutionMethod, Observable):
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
     """
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         super(UniversalFGM, self).__init__()
 
         self.desc = 'UFGM, $\epsilon = {}$'.format(epsilon)
 
         self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
             self.oracle = oracle
-        elif sense == 'min':
+        elif sense == 'max':
             self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')

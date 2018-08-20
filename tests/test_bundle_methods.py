@@ -1,10 +1,10 @@
 import numpy as np
 from nsopy.bundle_methods import CuttingPlanesMethod, BundleMethod
 from nsopy.method_loggers import EnhancedDualMethodLogger
-from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
-##################`dimension
+##################
 # CUTTING PLANES #
 ##################
 
@@ -16,13 +16,14 @@ def test_cp_method_on_analytical_example():
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
                                       dimension=analytical_inner_problem.dimension,
-                                      epsilon=0.01)
+                                      epsilon=0.01,
+                                      sense='max')
 
     logger = EnhancedDualMethodLogger(dual_method)
 
-    for iteration in range(5):
-        # print(dual_method.lambda_k)
-        # print(dual_method.d_k)
+    for iteration in range(10):
+        print(dual_method.lambda_k)
+        print(dual_method.d_k)
         dual_method.dual_step()
 
     # Method should end close to lambda* = [1, [1-1.5]]
@@ -43,7 +44,8 @@ def test_cp_method_on_second_analytical_example():
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
                                       dimension=analytical_inner_problem.dimension,
-                                      epsilon=0.01)
+                                      epsilon=0.01,
+                                      sense='max')
 
     logger = EnhancedDualMethodLogger(dual_method)
 
@@ -66,7 +68,8 @@ def test_cp_method_on_third_analytical_example():
     dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
                                       analytical_inner_problem.projection_function,
                                       dimension=analytical_inner_problem.dimension,
-                                      epsilon=0.01)
+                                      epsilon=0.01,
+                                      sense='max')
     dual_method.set_dual_domain(type='sum to param', param=0.5)
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
 
@@ -88,6 +91,7 @@ def test_cp_method_on_third_analytical_example():
 # BUNDLE METHOD #
 #################
 
+
 def test_bundle_method_on_analytical_example():
     print('# Test Bundle Method on Analytical Example (2 ineq)')
     # see definition of AnalyticalExampleInnerProblem for problem and solution statement
@@ -96,7 +100,9 @@ def test_bundle_method_on_analytical_example():
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
                                dimension=analytical_inner_problem.dimension,
-                               epsilon=0.01)
+                               epsilon=0.01,
+                               sense='max')
+
     dual_method.set_dual_domain(type='positive orthant', param=0.5)
 
     logger = EnhancedDualMethodLogger(dual_method)
@@ -116,7 +122,6 @@ def test_bundle_method_on_analytical_example():
     np.testing.assert_allclose(logger.d_k_iterates[-1], -0.5, atol=0.02)
 
 
-
 def test_bundle_method_on_second_analytical_example():
     print('# Test Bundle Method on Second Analytical Example (1 eq, 1 ineq)')
     # see definition of AnalyticalExampleInnerProblem for problem and solution statement
@@ -125,7 +130,8 @@ def test_bundle_method_on_second_analytical_example():
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
                                dimension=analytical_inner_problem.dimension,
-                               epsilon=0.01)
+                               epsilon=0.01,
+                               sense='max')
 
     logger = EnhancedDualMethodLogger(dual_method)
 
@@ -148,7 +154,9 @@ def test_bundle_method_on_third_analytical_example():
     dual_method = BundleMethod(analytical_inner_problem.oracle,
                                analytical_inner_problem.projection_function,
                                dimension=analytical_inner_problem.dimension,
-                               epsilon=0.01)
+                               epsilon=0.01,
+                               sense='max')
+
     dual_method.set_dual_domain(type='sum to param', param=0.5)
     dual_method.lambda_k = dual_method.projection_function(np.array([-2,2]))
 

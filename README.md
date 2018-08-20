@@ -4,7 +4,7 @@ A set of first-order methods for solving
 
 ![optimization problem](img/min_opt.png "Non-Smooth Optimization Program")
 
-when
+when -- what if we actually tried to do $x = 1$ or $$x =1$$ ?
 * f(x) is convex, but not necessarily differentiable
 * the set ![X](img/XR.png) is convex
 
@@ -69,17 +69,17 @@ Result:
 * **Standard Subgradient Method**
 
 ~~~~ 
-SubgradientMethod(oracle, projection_function, stepsize_0=1.0, stepsize_rule='1/k', sense='max')
+SubgradientMethod(oracle, projection_function, dimension=0, stepsize_0=1.0, stepsize_rule='1/k', sense='min')
 ~~~~
-Stepsize rules valiable: `stepsize_rule: ['constant', '1/k']`
+Stepsize rules valiable: `stepsize_rule: ['constant', '1/k', '1/sqrt(k)']`
 
 * **Quasi-Monotone Methods**
 
 Implementation of double simple averaging, and triple averaging methods from Nesterov's paper on [quasi-monotone methods](http://link.springer.com/article/10.1007/s10957-014-0677-5). 
 
 ~~~~ 
-SGMDoubleSimpleAveraging(oracle, projection_function, gamma=1.0, sense='max')
-SGMTripleAveraging(oracle, projection_function, variant=1, gamma=1.0, sense='max'):
+SGMDoubleSimpleAveraging(oracle, projection_function, dimension=0, gamma=1.0, sense='min')
+SGMTripleAveraging(oracle, projection_function, dimension=0, variant=1, gamma=1.0, sense='min'):
 ~~~~
 
 Variants of `SGMTripleAveraging` available: `variant: [1, 2]`
@@ -89,9 +89,9 @@ Variants of `SGMTripleAveraging` available: `variant: [1, 2]`
 Implementation of Nesterov's [universal gradient methods](http://link.springer.com/article/10.1007/s10107-014-0790-0), primal, dual and fast versions.
 
 ~~~~
-UniversalPGM(oracle, projection_function, epsilon=1.0, averaging=False, sense='max')
-UniversalDGM(oracle, projection_function, epsilon=1.0, averaging=False, sense='max'):        
-UniversalFGM(oracle, projection_function, epsilon=1.0, averaging=False, sense='max'):
+UniversalPGM(oracle, projection_function, dimension=0, epsilon=1.0, averaging=False, sense='min')
+UniversalDGM(oracle, projection_function, dimension=0, epsilon=1.0, averaging=False, sense='min'):        
+UniversalFGM(oracle, projection_function, dimension=0, epsilon=1.0, averaging=False, sense='min'):
 ~~~~
 
 * **Cutting Planes Method**
@@ -99,7 +99,7 @@ UniversalFGM(oracle, projection_function, epsilon=1.0, averaging=False, sense='m
 *Warning*: this method requires `gurobipy`; if you are an academic, you can get a free license [here](http://www.gurobi.com/academia/for-universities]). 
 
 ~~~~
-CuttingPlanesMethod(oracle, projection_function, epsilon=0.01, search_box_min=-10, search_box_max=10, sense='max')
+CuttingPlanesMethod(oracle, projection_function, dimension=0, epsilon=0.01, search_box_min=-10, search_box_max=10, sense='min')
 ~~~~
 
 The parameter `epsilon` is the absolute required suboptimality level `|f_k - f*|` used as a stopping criterion. Note that a search box needs to be specified.
@@ -112,15 +112,15 @@ The parameter `epsilon` is the absolute required suboptimality level `|f_k - f*|
 Implementation of a basic variant of the bundle method. 
 
 ~~~~
-BundleMethod(oracle, projection_function, epsilon=0.01, mu=0.5, sense='max'):
+BundleMethod(oracle, projection_function, dimension=0, epsilon=0.01, mu=0.5, sense='min'):
 ~~~~
 
 
 ## Important Remarks
 
-* The basic usage example illustrates how the oracle can implement a special case to respond to an initial request with "x_k = 0", 
-when the solution method still doesn't know the dimension of x. Alternatively, methods can be instantiated with the argument `dimension`, 
-in which case the oracle doesn't need to implement a special case for 0.  
+* Methods have to either be instantiated with the appropriate dimension argument, or implement a special case for 0. 
+The basic usage example above illustrates an oracle implementing such a special case. 
+For this example, alternatively one could have instantiated the solution method with `dimension = 1`.  
 
 * The first-order oracle must also provide a projection function; [here is a list of cases](img/simple_projections.png) for which 
 the projection operation is computationally inexpensive.

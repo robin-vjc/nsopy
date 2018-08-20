@@ -32,15 +32,14 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
     Implementation of Algorithm (CP) in [1], p.19.
     """
 
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MAX, search_box_max=SEARCH_BOX_MAX, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MAX, search_box_max=SEARCH_BOX_MAX, sense='min'):
         super(CuttingPlanesMethod, self).__init__()
         self.desc = 'Cutting Planes, $\epsilon = {}$'.format(epsilon)
 
-        self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model
+        elif sense == 'max':
             self.oracle = oracle
-        elif sense == 'min':
-            self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function
@@ -48,7 +47,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         self.iteration_number = 1
         self.oracle_calls = 0
         self.epsilon = epsilon
-        self.optimizer_not_yet_found = 1
+        self.optimizer_not_yet_found = True
 
         if dimension == 0:
             self.lambda_k = self.projection_function(0)
@@ -74,7 +73,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         self.bundle_model = gb.Model()
         # self.bundle_model.setParam(u'MIPGap', 0.745)
         self.bundle_model.setParam(u'TimeLimit', 360)
-        self.bundle_model.setParam('OutputFlag', False)
+        # self.bundle_model.setParam('OutputFlag', False)
         self.r = self.bundle_model.addVar(obj=1, lb=-gb.GRB.INFINITY)
         self.lmd = {}
         for i in range(self.dimension):
@@ -99,7 +98,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
             self.oracle_calls += 1
 
             # Step 3
-            delta_k = - self.d_k - self.f_hat_lambda_k
+            delta_k = abs(self.d_k - self.f_hat_lambda_k)
 
             # print("########### step k={} ############".format(self.iteration_number))
             # print("delta_k = "+str(delta_k))
@@ -107,9 +106,9 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
 
             # Step 4
             if delta_k < self.epsilon:
-                # print('we have found a point satisfying optimality gap')
+                print('we have found a point satisfying optimality gap', delta_k)
                 # optimizer found
-                self.optimizer_not_yet_found = 0
+                self.optimizer_not_yet_found = False
             else:
                 # Step 5
                 a = - self.diff_d_k
@@ -134,6 +133,9 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
             self.r >= gb.quicksum([a[i] * self.lmd[i] for i in range(self.dimension)]) + b)
 
         self.bundle_model.update()
+
+        print('number of constraints in theory: ', len(self.constraints))
+        print('model size: ', self.bundle_model)
         # print("constr coeffs lambda mu: " + str(
         #     [self.bundle_model.getCoeff(self.constraints[self.iteration_number], self.lmd[i]) for i in
         #      range(self.n_constr)]))
@@ -181,15 +183,14 @@ class BundleMethod(SolutionMethod, Observable):
     p.21 and Algorithm 7.3 in [2], p.374 (for the constrained dual case).
     """
 
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU, sense='max'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU, sense='min'):
         super(BundleMethod, self).__init__()
         self.desc = 'Bundle Method, $\epsilon = {}, \mu = {}$'.format(epsilon, mu)
 
-        self.oracle = oracle
-        if sense == 'max':
+        if sense == 'min':
+            self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model
+        elif sense == 'max':
             self.oracle = oracle
-        elif sense == 'min':
-            self.oracle = invert_oracle_sense(oracle)
         else:
             raise ValueError('Sense should be either "min" or "max"')
         self.projection_function = projection_function

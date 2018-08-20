@@ -3,7 +3,7 @@ from __future__ import print_function
 import numpy as np
 from nsopy.method_loggers import GenericDualMethodLogger
 from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from nsopy.tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
+from tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
 
 
 def test_DSA_on_analytical_example():
@@ -17,7 +17,8 @@ def test_DSA_on_analytical_example():
     dual_method = SGMDoubleSimpleAveraging(analytical_inner_problem.oracle,
                                            analytical_inner_problem.projection_function,
                                            dimension=analytical_inner_problem.dimension,
-                                           gamma=GAMMA)
+                                           gamma=GAMMA,
+                                           sense='max')
     logger = GenericDualMethodLogger(dual_method)
 
     for iteration in range(20):
@@ -45,7 +46,8 @@ def test_TSA_variant_1_on_analytical_example():
                                      analytical_inner_problem.projection_function,
                                      dimension=analytical_inner_problem.dimension,
                                      variant=1,
-                                     gamma=GAMMA)
+                                     gamma=GAMMA,
+                                     sense='max')
     logger = GenericDualMethodLogger(dual_method)
 
     for iteration in range(20):
@@ -73,7 +75,8 @@ def test_TSA_variant_2_on_analytical_example():
                                      analytical_inner_problem.projection_function,
                                      dimension=analytical_inner_problem.dimension,
                                      variant=2,
-                                     gamma=GAMMA)
+                                     gamma=GAMMA,
+                                     sense='max')
     logger = GenericDualMethodLogger(dual_method)
 
     for iteration in range(60):
@@ -100,7 +103,8 @@ def test_DSA_on_Bertsekas_example():
     dual_method = SGMDoubleSimpleAveraging(analytical_inner_problem.oracle,
                                            analytical_inner_problem.projection_function,
                                            dimension=analytical_inner_problem.dimension,
-                                           gamma=0.5)
+                                           gamma=0.5,
+                                           sense='max')
     logger = GenericDualMethodLogger(dual_method)
 
     # move initial point
