@@ -2,41 +2,12 @@
 import copy
 import time
 
+from nsopy.observer_pattern import Observer
 
-class Observable(object):
-    """ Make object observable. """
-    def __init__(self):
-        self.observers = []
-
-    def register_observer(self, observer):
-        self.observers.append(observer)
-
-    def remove_observer(self, observer):
-        self.observers.remove(observer)
-
-    def notify_observers(self):
-        for observer in self.observers:
-            observer.update()
-
-
-class Observer(object):
-    def update(self):
-        """
-        This method is called whenever an Observable object calls notify_observers()
-        (usually when the Observable object changes state).
-        """
-        raise NotImplementedError()
-
-
-############################
-# CONCRETE IMPLEMENTATIONS #
-############################
 
 class TemplateMethodLogger(Observer):
     def __init__(self, template_method):
-        # we get a reference to the method we are supposed to
         self.method = template_method
-        # we need to register the logger with the observable, so we get the notifications
         self.method.register_observer(self)
         self.x_iterates = []
 
@@ -46,8 +17,7 @@ class TemplateMethodLogger(Observer):
 
 
 class GenericMethodLogger(Observer):
-    """
-    Works with all implemented dual nsopy, and logs only variables that are common across all
+    """ Works with all implemented dual nsopy, and logs only variables that are common across all
     of them (lambda_k, d_k, etc)
     """
     def __init__(self, dual_method):
@@ -65,8 +35,7 @@ class GenericMethodLogger(Observer):
 
 
 class GenericDualMethodLogger(Observer):
-    """
-    Works with all implemented dual nsopy, and logs only variables that are common across all
+    """ Works with all implemented dual nsopy, and logs only variables that are common across all
     of them (lambda_k, d_k, etc)
     """
     def __init__(self, dual_method):
@@ -86,8 +55,7 @@ class GenericDualMethodLogger(Observer):
 
 
 class EnhancedDualMethodLogger(Observer):
-    """
-    Additionally logs # of oracle calls, time
+    """ Additionally logs # of oracle calls, time
     """
     def __init__(self, dual_method):
         # we get a reference to the method we are supposed to
@@ -123,8 +91,7 @@ class EnhancedDualMethodLogger(Observer):
 
 
 class DualDgmFgmMethodLogger(Observer):
-    """
-    Additionally logs # of oracle calls, time
+    """ Additionally logs # of oracle calls, time
     """
     def __init__(self, dual_method):
         # we get a reference to the method we are supposed to
@@ -154,8 +121,7 @@ class DualDgmFgmMethodLogger(Observer):
 
 
 class PGMVisualizationLogger(Observer):
-    """
-    Additionally logs # of oracle calls, time
+    """ Additionally logs # of oracle calls, time
     """
     def __init__(self, dual_method):
         # we get a reference to the method we are supposed to
@@ -189,8 +155,7 @@ class PGMVisualizationLogger(Observer):
 
 
 class SlimDualMethodLogger(Observer):
-    """
-    Don't store lambda_k nor x_k. For big problems.
+    """ Don't store lambda_k nor x_k. For big problems.
     """
     def __init__(self, dual_method):
         # we get a reference to the method we are supposed to

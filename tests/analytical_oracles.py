@@ -79,6 +79,9 @@ class AnalyticalExampleInnerProblem(object):
         # simply project lambda_k on the positive orthant
         return np.maximum(lambda_k, 0)
 
+    def softmax_projection(self):
+        pass
+
 
 class SecondAnalyticalExampleInnerProblem(object):
     """

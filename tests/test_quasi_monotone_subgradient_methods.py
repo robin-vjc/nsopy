@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 import numpy as np
-from nsopy.method_loggers import GenericDualMethodLogger
+from nsopy.loggers import GenericDualMethodLogger
 from nsopy.quasi_monotone_subgradient_methods import SGMDoubleSimpleAveraging, SGMTripleAveraging
 from tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
 

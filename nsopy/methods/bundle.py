@@ -1,14 +1,6 @@
-##################################
-# CUTTING PLANE & BUNDLE METHODS #
-##################################
-# Implementation based on
-# [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
-# pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
-# copy of the pdf in "./nsopy/doc/"
-
 from __future__ import print_function
 from __future__ import division
-from nsopy.method_loggers import Observable
+from nsopy.loggers import Observable
 from nsopy.base import SolutionMethod
 import numpy as np
 import copy
@@ -28,8 +20,11 @@ SEARCH_BOX_MAX = 10
 
 
 class CuttingPlanesMethod(SolutionMethod, Observable):
-    """
-    Implementation of Algorithm (CP) in [1], p.19.
+    """Implementation of Algorithm (CP) in [1], p.19.
+
+    [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
+    pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
+    copy of the pdf in "./nsopy/doc/"
     """
 
     def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MAX, search_box_max=SEARCH_BOX_MAX, sense='min'):
@@ -181,6 +176,10 @@ class BundleMethod(SolutionMethod, Observable):
     """
     Implementation of Bundle Method, based on my paper, as adapted from algorithm (BA) in [1],
     p.21 and Algorithm 7.3 in [2], p.374 (for the constrained dual case).
+
+    [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
+    pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
+    copy of the pdf in "./nsopy/doc/"
     """
 
     def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU, sense='min'):

@@ -1,16 +1,9 @@
-##############################
-# UNIVERSAL GRADIENT METHODS #
-##############################
-# References
-# [1] Universal Gradient Methods for Convex Optimization Problems, Yu. Nesterov, CORE Discussion Paper, 2013.
-# Note: zeta(x,y) = ||y-x||^2_2 is used as the prox function, throughout.
-
 from __future__ import division
-from nsopy.method_loggers import Observable
-from nsopy.base import SolutionMethod
 import numpy as np
 import copy
 
+from nsopy.base import SolutionMethod
+from nsopy.observer_pattern import Observable
 from nsopy.utils import invert_oracle_sense
 
 UGM_DEFAULT_EPSILON = 1.0
@@ -18,22 +11,22 @@ UGM_DEFAULT_L_0 = 1.1
 
 
 def _bregman_map(M, lambda_k, diff_d_k):
-    # Bregman map, according to [1], Eq. 2.9, with f(x) := -d(lambda), and M*psi(x,y) := M/2*||lambda-lambda_k||_2
-    # Old:
-    # lambda_bregman = lambda_k + float(1.0)/M*diff_d_k
-    # return self._project_on_dual_feasible_set(lambda_bregman)
+    """ Bregman map, according to [1], Eq. 2.9, with f(x) := -d(lambda), and M*psi(x,y) := M/2*||lambda-lambda_k||_2
+    Old:
+    lambda_bregman = lambda_k + float(1.0)/M*diff_d_k
+    return self._project_on_dual_feasible_set(lambda_bregman)
+    """
     return lambda_k + float(1.0)/M*diff_d_k
 
-
-####################################
-# UNIVERSAL PRIMAL GRADIENT METHOD #
-####################################
 
 class UniversalPGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (2.16) in [1], the Universal Primal Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
+
+    [1] Universal Gradient Methods for Convex Optimization Problems, Yu. Nesterov, CORE Discussion Paper, 2013.
+    Note: zeta(x,y) = ||y-x||^2_2 is used as the prox function, throughout.
     """
     def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         """
@@ -195,15 +188,14 @@ class UniversalPGM(SolutionMethod, Observable):
         self.notify_observers()
 
 
-##################################
-# UNIVERSAL DUAL GRADIENT METHOD #
-##################################
-
 class UniversalDGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (3.2) in [1], the Universal Dual Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
+
+    [1] Universal Gradient Methods for Convex Optimization Problems, Yu. Nesterov, CORE Discussion Paper, 2013.
+    Note: zeta(x,y) = ||y-x||^2_2 is used as the prox function, throughout.
     """
     def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         super(UniversalDGM, self).__init__()
@@ -364,15 +356,14 @@ class UniversalDGM(SolutionMethod, Observable):
         self.notify_observers()
 
 
-##################################
-# UNIVERSAL FAST GRADIENT METHOD #
-##################################
-
 class UniversalFGM(SolutionMethod, Observable):
     """
     Implementation of Algorithm (4.1) in [1], the Universal Fast Gradient Method.
     Note that the algorithm is written for the maximization of a convex function, while in the duality
     framework we maximize a concave fct. Hence, f(x) := -d(lambda)
+
+    [1] Universal Gradient Methods for Convex Optimization Problems, Yu. Nesterov, CORE Discussion Paper, 2013.
+    Note: zeta(x,y) = ||y-x||^2_2 is used as the prox function, throughout.
     """
     def __init__(self, oracle, projection_function, dimension=0, epsilon=UGM_DEFAULT_EPSILON, averaging=False, sense='min'):
         super(UniversalFGM, self).__init__()

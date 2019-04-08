@@ -1,15 +1,10 @@
 from __future__ import print_function
 from __future__ import division
-from nsopy.method_loggers import Observable
+from nsopy.observer_pattern import Observable
 from nsopy.base import SolutionMethod
 
 
-#############################################
-# TEMPLATE OF CONCRETE CLASS IMPLEMENTATION #
-#############################################
-
 class TemplateMethod(SolutionMethod, Observable):
-    """ Implementation of a dual method """
     def __init__(self, oracle, projection_function):
         super(TemplateMethod, self).__init__()
         self.oracle = oracle

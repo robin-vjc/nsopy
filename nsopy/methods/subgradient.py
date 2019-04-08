@@ -3,14 +3,10 @@
 
 from __future__ import print_function
 from __future__ import division
-from nsopy.method_loggers import Observable
-from nsopy.base import SolutionMethod
 import numpy as np
 
-
-#######################
-# IMPLEMENTED METHODS #
-#######################
+from nsopy.methods.base import SolutionMethod
+from nsopy.observer_pattern import Observable
 from nsopy.utils import invert_oracle_sense
 
 
