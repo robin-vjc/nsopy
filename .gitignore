@@ -8,5 +8,6 @@ gen
 *.csv
 *.log
 notebooks/.ipynb_checkpoints
+notebooks/scratch.ipynb
 nsopy.egg-info
 dist
