@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 import copy
 
-from nsopy.base import SolutionMethod
+from nsopy.methods.base import SolutionMethod
 from nsopy.observer_pattern import Observable
 from nsopy.utils import invert_oracle_sense
 

@@ -2,7 +2,7 @@ from __future__ import print_function
 
 import numpy as np
 from nsopy.loggers import GenericDualMethodLogger, DualDgmFgmMethodLogger
-from nsopy.universal_gradient_methods import UniversalPGM, UniversalDGM, UniversalFGM
+from nsopy.methods.universal import UniversalPGM, UniversalDGM, UniversalFGM
 from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 
 
@@ -33,7 +33,6 @@ def test_UPGM_on_analytical_example():
     np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([1., 1.]), rtol=1e-1, atol=0)
     # with value close to dual optimum
     np.testing.assert_allclose(logger.d_k_iterates[-1], -0.5, rtol=1e-1, atol=0)
-
 
 
 def test_averaged_UPGM_on_analytical_example():

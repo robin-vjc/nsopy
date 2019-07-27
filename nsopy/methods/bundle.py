@@ -1,7 +1,7 @@
 from __future__ import print_function
 from __future__ import division
-from nsopy.loggers import Observable
-from nsopy.base import SolutionMethod
+from nsopy.observer_pattern import Observable
+from nsopy.methods.base import SolutionMethod
 import numpy as np
 import copy
 

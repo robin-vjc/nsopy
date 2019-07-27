@@ -4,7 +4,7 @@ import time
 
 import numpy as np
 from nsopy.loggers import TemplateMethodLogger, GenericDualMethodLogger, EnhancedDualMethodLogger
-from nsopy.subgradient_methods import SubgradientMethod
+from nsopy.methods.subgradient import SubgradientMethod
 from nsopy.template_methods import TemplateMethod
 from .analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
 

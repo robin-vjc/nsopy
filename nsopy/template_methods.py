@@ -1,7 +1,7 @@
 from __future__ import print_function
 from __future__ import division
 from nsopy.observer_pattern import Observable
-from nsopy.base import SolutionMethod
+from nsopy.methods.base import SolutionMethod
 
 
 class TemplateMethod(SolutionMethod, Observable):

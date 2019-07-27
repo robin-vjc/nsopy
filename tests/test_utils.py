@@ -1,13 +1,11 @@
+import time
+
 from nsopy.loggers import SlimDualMethodLogger
 from nsopy.methods_factory import DualMethodsFactory
-from nsopy.utils import record_logger
 from tests.analytical_oracles import SecondAnalyticalExampleInnerProblem
 
 
 def test_slimlogger_recorder():
-    # instantiate ip (first instance of 2 stage)
-    # ip = BenchmarkInnerProblemsFactory(type='supply chains', subtype='all', instance_n=0)
-    # ip = BenchmarkInnerProblemsFactory(type='2 stage stoch', subtype='dcap', instance_n=0)
     ip = SecondAnalyticalExampleInnerProblem()
 
     # method, logger
@@ -20,5 +18,5 @@ def test_slimlogger_recorder():
     while method.oracle_calls < N_ORACLE_CALLS:
         method.dual_step()
 
-    # execute recorder
-    record_logger(logger)
+    assert len(logger.d_k_iterates) == 3
+    assert type(time.localtime(logger.start_time[0]).tm_year) == int
