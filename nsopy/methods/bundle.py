@@ -27,7 +27,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
     copy of the pdf in "./nsopy/doc/"
     """
 
-    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MAX, search_box_max=SEARCH_BOX_MAX, sense='min'):
+    def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MIN, search_box_max=SEARCH_BOX_MAX, sense='min'):
         super(CuttingPlanesMethod, self).__init__()
         self.desc = 'Cutting Planes, $\epsilon = {}$'.format(epsilon)
 
@@ -59,6 +59,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         # search box C
         self.lambda_min = search_box_min
         self.lambda_max = search_box_max
+
         # initial function value
         self.f_hat_lambda_k = -np.infty
         self.bundle = []
@@ -69,13 +70,14 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         # self.bundle_model.setParam(u'MIPGap', 0.745)
         self.bundle_model.setParam(u'TimeLimit', 360)
         # self.bundle_model.setParam('OutputFlag', False)
-        self.r = self.bundle_model.addVar(obj=1, lb=-gb.GRB.INFINITY)
+        self.r = self.bundle_model.addVar(obj=1, lb=-gb.GRB.INFINITY, name='r')
         self.lmd = {}
         for i in range(self.dimension):
             self.lmd[i] = self.bundle_model.addVar(vtype=gb.GRB.CONTINUOUS,
                                                    obj=0,
                                                    lb=self.lambda_min,
-                                                   ub=self.lambda_max)
+                                                   ub=self.lambda_max,
+                                                   name='lambda_{}'.format(i))
         self.constraints = {}
         self.bundle_model.update()
         # --------------------------------------------------- #
@@ -101,7 +103,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
 
             # Step 4
             if delta_k < self.epsilon:
-                print('we have found a point satisfying optimality gap', delta_k)
+                print('We have found a point satisfying optimality gap', delta_k)
                 # optimizer found
                 self.optimizer_not_yet_found = False
             else:
@@ -109,7 +111,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
                 a = - self.diff_d_k
                 b = - self.d_k - np.dot(-self.diff_d_k, self.lambda_k)
                 self.bundle.append((a, b))  # f_hat(lambda) = a*lambda + b
-                # print("bundle model: "+str(self.bundle))
+                print("bundle model: "+str(self.bundle))
                 # Step 6, compute and solve LP
                 self.f_hat_lambda_k, self.lambda_k = self.min_of_bundle()
 
@@ -133,15 +135,11 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         print('model size: ', self.bundle_model)
         # print("constr coeffs lambda mu: " + str(
         #     [self.bundle_model.getCoeff(self.constraints[self.iteration_number], self.lmd[i]) for i in
-        #      range(self.n_constr)]))
+        #      range(self.dimension)]))
         # print("constr coeffs r: " + str(self.bundle_model.getCoeff(self.constraints[self.iteration_number], self.r)))
 
-        # self.bundle_model.write('test_model.lp')
         self.bundle_model.optimize()
         optimizer = np.array([self.lmd[i].X for i in range(self.dimension)])
-        # return 0, np.array([0, 0])
-        # print("optimizer: " + str(optimizer))
-        # print("val: " + str(self.r.X))
 
         return self.bundle_model.ObjVal, optimizer
 

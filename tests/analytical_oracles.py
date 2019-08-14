@@ -4,6 +4,31 @@ from __future__ import print_function
 import numpy as np
 
 
+class OneDimensionalProblem:
+    def __init__(self):
+        self.dimension = 1
+
+    @staticmethod
+    def oracle(x_k):
+        # evaluation of the f_i components at x_k
+        fi_x_k = [-2 * x_k + 2, -1.0 / 3 * x_k + 1, x_k - 2]
+
+        f_x_k = max(fi_x_k)  # function value at x_k
+
+        diff_fi = [-2, -1.0 / 3.0, 1]  # gradients of the components
+        max_i = fi_x_k.index(f_x_k)
+        diff_f_xk = np.array([diff_fi[max_i], ])  # subgradient at x_k is the gradient of the active function component
+
+        return 0, f_x_k, diff_f_xk
+
+    @staticmethod
+    def projection_function(x_k):
+        if x_k is 0:
+            return np.array([0, ])
+        else:
+            return np.maximum(x_k, 0)
+
+
 class AnalyticalExampleInnerProblem(object):
     """
     This example has 2 inequalities that are dualized.

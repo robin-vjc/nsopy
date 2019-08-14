@@ -1,12 +1,36 @@
 import numpy as np
 from nsopy.methods.bundle import CuttingPlanesMethod, BundleMethod
 from nsopy.loggers import EnhancedDualMethodLogger
-from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, ConstrainedDualAnalyticalExampleInnerProblem
+from tests.analytical_oracles import AnalyticalExampleInnerProblem, SecondAnalyticalExampleInnerProblem, \
+    ConstrainedDualAnalyticalExampleInnerProblem, OneDimensionalProblem
 
 
 ##################
 # CUTTING PLANES #
 ##################
+
+
+def test_cp_method_on_one_dimensional_example():
+    print('# Test Cutting Plane Method on One-Dimensional Example')
+    analytical_inner_problem = OneDimensionalProblem()
+
+    dual_method = CuttingPlanesMethod(analytical_inner_problem.oracle,
+                                      analytical_inner_problem.projection_function,
+                                      epsilon=0.01,
+                                      sense='min')
+
+    logger = EnhancedDualMethodLogger(dual_method)
+
+    for iteration in range(10):
+        print('lambda_k : ', dual_method.lambda_k)
+        print('d_k: ', dual_method.d_k)
+        dual_method.dual_step()
+
+    # Method should end close to lambda* = 2.25
+    # np.testing.assert_allclose(logger.lambda_k_iterates[-1], np.array([1, 1.5]), atol=0.01)
+    lambda_star = logger.lambda_k_iterates[-1]
+    assert abs(lambda_star[0] - 2.25) <= 0.01
+
 
 def test_cp_method_on_analytical_example():
     print('# Test Cutting Plane Method on Analytical Example (2 ineq)')
@@ -170,6 +194,6 @@ def test_bundle_method_on_third_analytical_example():
     # Method should end close to lambda*, where lambda*[1] = 0.5 - lambda*[0], and 0<= lambda*[0] <= 0.5
     lambda_star = logger.lambda_k_iterates[-1]
     assert 0 <= lambda_star[0] <= 0.5
-    assert lambda_star[1] == 0.5 - lambda_star[0]
+    assert abs(lambda_star[1] - (0.5 - lambda_star[0])) <= 0.01  # should have: lambda_0 + lambda_1 = 0.5
     # with value close to dual optimum
     np.testing.assert_allclose(logger.d_k_iterates[-1], -1.0, atol=0.01)

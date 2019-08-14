@@ -38,9 +38,10 @@ def oracle(x_k):
 
     f_x_k = max(fi_x_k)  # function value at x_k
 
-    diff_fi = [-1, -1.0/6.0, 1]  # gradients of the components
+    diff_fi = [-2, -1.0/3.0, 1]  # gradients of the components
     max_i = fi_x_k.index(f_x_k)
-    diff_f_xk = diff_fi[max_i]  # subgradient at x_k is the gradient of the active function component
+    # subgradient at x_k is the gradient of the active function component; cast as (1x1 dimensional) np.array
+    diff_f_xk = np.array([diff_fi[max_i], ])  
 
     return 0, f_x_k, diff_f_xk
 
