@@ -29,25 +29,29 @@ def DualMethodsFactory(inner_problem, method, param=0):
             return SubgradientMethod(oracle=inner_problem.oracle,
                                      projection_function=inner_problem.projection_function,
                                      dimension=inner_problem.dimension,
-                                     stepsize_rule='1/k')
+                                     stepsize_rule='1/k',
+                                     sense='max')
         else:
             return SubgradientMethod(oracle=inner_problem.oracle,
                                      projection_function=inner_problem.projection_function,
                                      dimension=inner_problem.dimension,
                                      stepsize_rule='1/k',
-                                     stepsize_0=param)
+                                     stepsize_0=param,
+                                     sense='max')
     elif method == 'SG const':
         if param == 0:
             return SubgradientMethod(oracle=inner_problem.oracle,
                                      projection_function=inner_problem.projection_function,
                                      dimension=inner_problem.dimension,
-                                     stepsize_rule='constant')
+                                     stepsize_rule='constant',
+                                     sense='max')
         else:
             return SubgradientMethod(oracle=inner_problem.oracle,
                                      projection_function=inner_problem.projection_function,
                                      dimension=inner_problem.dimension,
                                      stepsize_rule='constant',
-                                     stepsize_0=param)
+                                     stepsize_0=param,
+                                     sense='max')
     #############
     # Universal #
     #############
@@ -61,7 +65,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
         return UniversalPGM(oracle=inner_problem.oracle,
                             projection_function=inner_problem.projection_function,
                             dimension=inner_problem.dimension,
-                            epsilon=epsilon)
+                            epsilon=epsilon,
+                            sense='max')
     elif method == 'UDGM':
         if param == 0:
             from nsopy.methods.universal import UGM_DEFAULT_EPSILON
@@ -72,7 +77,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
         return UniversalDGM(oracle=inner_problem.oracle,
                             projection_function=inner_problem.projection_function,
                             dimension=inner_problem.dimension,
-                            epsilon=epsilon)
+                            epsilon=epsilon,
+                            sense='max')
     elif method == 'UFGM':
         if param == 0:
             from nsopy.methods.universal import UGM_DEFAULT_EPSILON
@@ -83,7 +89,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
         return UniversalFGM(oracle=inner_problem.oracle,
                             projection_function=inner_problem.projection_function,
                             dimension=inner_problem.dimension,
-                            epsilon=epsilon)
+                            epsilon=epsilon,
+                            sense='max')
     #####################
     # Quasi Monotone SG #
     #####################
@@ -96,7 +103,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
         return SGMDoubleSimpleAveraging(oracle=inner_problem.oracle,
                                         projection_function=inner_problem.projection_function,
                                         dimension=inner_problem.dimension,
-                                        gamma=gamma)
+                                        gamma=gamma,
+                                        sense='max')
     elif method == 'TA 1':
         if param == 0:
             from nsopy.methods.quasi_monotone import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
@@ -107,7 +115,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
                                   projection_function=inner_problem.projection_function,
                                   dimension=inner_problem.dimension,
                                   variant=1,
-                                  gamma=gamma)
+                                  gamma=gamma,
+                                  sense='max')
     elif method == 'TA 2':
         if param == 0:
             from nsopy.methods.quasi_monotone import METHOD_QUASI_MONOTONE_DEFAULT_GAMMA
@@ -118,7 +127,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
                                   projection_function=inner_problem.projection_function,
                                   dimension=inner_problem.dimension,
                                   variant=2,
-                                  gamma=gamma)
+                                  gamma=gamma,
+                                  sense='max')
     #########################
     # Cutting Planes/Bundle #
     #########################
@@ -132,7 +142,8 @@ def DualMethodsFactory(inner_problem, method, param=0):
         return CuttingPlanesMethod(inner_problem.oracle,
                                    inner_problem.projection_function,
                                    dimension=inner_problem.dimension,
-                                   epsilon=epsilon)
+                                   epsilon=epsilon,
+                                   sense='max')
 
     elif method == 'bundle':
         print('Bundle Method instantiated. Remember to call method.set_dual_domain().')
@@ -148,4 +159,5 @@ def DualMethodsFactory(inner_problem, method, param=0):
                             inner_problem.projection_function,
                             dimension=inner_problem.dimension,
                             epsilon=epsilon,
-                            mu=DEFAULT_MU)
+                            mu=DEFAULT_MU,
+                            sense='max')
