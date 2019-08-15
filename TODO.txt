@@ -14,3 +14,13 @@
 - replace CP and BDL gurobi dependency with open source alternative?
 - works on python 3? travis..
 - more test cases
+
+
+# To upload new version
+(pip install setuptools wheel twine)
+
+(clear directory, otherwise twine gets confused about the version to upload)
+cd dist
+rm *
+python setup.py sdist bdist_wheel
+twine upload dist/*
