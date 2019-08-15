@@ -20,7 +20,7 @@ setup(
     author_email='vjc.robin@gmail.com',
     install_requires=REQUIRES,
     url='https://github.com/robin-vjc/nsopy',  # use the URL to the github repo
-    download_url='https://github.com/robin-vjc/nsopy/archive/1.21.tar.gz',
+    download_url='https://github.com/robin-vjc/nsopy/archive/1.51.tar.gz',
     keywords=['non-smooth', 'distributed', 'optimization', 'python'],
     packages=find_packages(),
 )
