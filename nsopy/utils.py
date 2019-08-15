@@ -14,7 +14,7 @@ def invert_oracle_sense(oracle):
 
 def record_logger(logger, filename=r'logger_record.csv'):
     """ Records the information contained in a method logger into a csv. """
-    inner_problem = logger.method.oracle.im_self
+    inner_problem = logger.method.oracle.__self__
 
     instance_name = inner_problem.instance_name
     instance_subtype = inner_problem.instance_subtype

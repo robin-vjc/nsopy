@@ -154,7 +154,7 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
             self.bundle_model.addConstr(gb.quicksum([self.lmd[i] for i in self.lmd]) == param)
         elif type == '2 stage smps':
             # custom made for this inner problem type
-            inner_problem = self.oracle.im_self  # this feels dirty
+            inner_problem = self.oracle.__self__
             for i in range(inner_problem.n_x):
                 self.bundle_model.addConstr(
                     gb.quicksum([self.lmd[i+sc*(inner_problem.n_x)] for sc in range(inner_problem.n_scenarios)]) == 0
@@ -338,7 +338,7 @@ class BundleMethod(SolutionMethod, Observable):
             self.bundle_model.addConstr(gb.quicksum([self.lmd[i] for i in self.lmd]) == param)
         elif type == '2 stage smps':
             # custom made for this inner problem type
-            inner_problem = self.oracle.im_self  # this feels dirty
+            inner_problem = self.oracle.__self__
             for i in range(inner_problem.n_x):
                 self.bundle_model.addConstr(
                     gb.quicksum([self.lmd[i+sc*(inner_problem.n_x)] for sc in range(inner_problem.n_scenarios)]) == 0
