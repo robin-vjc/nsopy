@@ -1,15 +1,9 @@
 Welcome to nsopy documentation!
 ===================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+**nsopy** (/lu'make/) is a Python library implementing first order methods to solve non-smooth, convex optimization models.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
-
-Lumache has its documentation hosted on Read the Docsss.
+Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project.
 
 .. note::
 
