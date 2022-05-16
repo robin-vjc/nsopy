@@ -1,5 +1,3 @@
-from __future__ import print_function
-from __future__ import division
 from nsopy.observer_pattern import Observable
 from nsopy.methods.base import SolutionMethod
 import numpy as np
@@ -20,16 +18,16 @@ SEARCH_BOX_MAX = 10
 
 
 class CuttingPlanesMethod(SolutionMethod, Observable):
-    """Implementation of Algorithm (CP) in [1], p.19.
+    """
+    Implementation of Algorithm (CP) in [1], p.19.
 
     [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
     pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
-    copy of the pdf in "./nsopy/doc/"
     """
 
     def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, search_box_min=SEARCH_BOX_MIN, search_box_max=SEARCH_BOX_MAX, sense='min'):
         super(CuttingPlanesMethod, self).__init__()
-        self.desc = 'Cutting Planes, $\epsilon = {}$'.format(epsilon)
+        self.desc = f"Cutting Planes, $\\epsilon = {epsilon}$"
 
         if sense == 'min':
             self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model
@@ -82,24 +80,17 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
         self.bundle_model.update()
         # --------------------------------------------------- #
 
-        # for record keeping
         self.method_name = 'CP'
         self.parameter = epsilon
 
     def dual_step(self):
         if self.optimizer_not_yet_found:
             # Step 2
-            # print('before oracle call')
             self.x_k, self.d_k, self.diff_d_k = self.oracle(self.lambda_k)
-            # print('after oracle call')
             self.oracle_calls += 1
 
             # Step 3
             delta_k = abs(self.d_k - self.f_hat_lambda_k)
-
-            # print("########### step k={} ############".format(self.iteration_number))
-            # print("delta_k = "+str(delta_k))
-            # assert delta_k >= 0
 
             # Step 4
             if delta_k < self.epsilon:
@@ -124,20 +115,11 @@ class CuttingPlanesMethod(SolutionMethod, Observable):
     def min_of_bundle(self):
         # add new constraint
         a, b = self.bundle[-1]
-        # print(a,b)
         # self.bundle_model.addConstr(self.r >= gb.quicksum([a[i]*self.lmd[i] for i in range(self.n_constr)]) + b)
         self.constraints[self.iteration_number] = self.bundle_model.addConstr(
             self.r >= gb.quicksum([a[i] * self.lmd[i] for i in range(self.dimension)]) + b)
 
         self.bundle_model.update()
-
-        print('number of constraints in theory: ', len(self.constraints))
-        print('model size: ', self.bundle_model)
-        # print("constr coeffs lambda mu: " + str(
-        #     [self.bundle_model.getCoeff(self.constraints[self.iteration_number], self.lmd[i]) for i in
-        #      range(self.dimension)]))
-        # print("constr coeffs r: " + str(self.bundle_model.getCoeff(self.constraints[self.iteration_number], self.r)))
-
         self.bundle_model.optimize()
         optimizer = np.array([self.lmd[i].X for i in range(self.dimension)])
 
@@ -177,12 +159,11 @@ class BundleMethod(SolutionMethod, Observable):
 
     [1] Alexandre Belloni, Lecture Notes for IAP 2005 Course Introduction to Bundle Methods.
     pdf originally at: https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf
-    copy of the pdf in "./nsopy/doc/"
     """
 
     def __init__(self, oracle, projection_function, dimension=0, epsilon=DEFAULT_EPSILON, mu=DEFAULT_MU, sense='min'):
         super(BundleMethod, self).__init__()
-        self.desc = 'Bundle Method, $\epsilon = {}, \mu = {}$'.format(epsilon, mu)
+        self.desc = f"Bundle Method, $\\epsilon = {epsilon}, \mu = {mu}$"
 
         if sense == 'min':
             self.oracle = invert_oracle_sense(oracle)  # all methods have been coded to maximize the oracle model

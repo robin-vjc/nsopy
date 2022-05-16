@@ -1,4 +1,4 @@
-# nsopy -- Non-Smooth Optimization in Python
+# nsopy - non-smooth optimization in Python
 
 A set of first-order methods for solving
 
@@ -8,20 +8,25 @@ when
 * f(x) is convex, but not necessarily differentiable
 * the set ![X](img/XR.png) is convex
 
+The following methods are implemented:
+* **Classical Subgradient Method**, see [Wikipedia](https://en.wikipedia.org/wiki/Subgradient_method).
+* **Quasi-Monotone Methods**: double simple averaging, and triple averaging methods from [this Nesterov's paper](http://link.springer.com/article/10.1007/s10957-014-0677-5).
+* **Universal Gradient Methods**: primal, dual and fast versions of methods from [this Nesterov's paper](http://link.springer.com/article/10.1007/s10107-014-0790-0).
+* **Cutting Planes/Bundle Methods**: see, e.g., these [lecture notes by Alessandro Belloni](https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf).
+
 ## Installation
 
-The package is pip-installable:
-
-```
->>> pip install nsopy
+```bash
+pip install nsopy
 ```
 
-Optional: tests are in ```./nsopy/tests/``` and can be run with the ```py.test``` test runner.
+## Usage
 
+See <the docs>.
 
-## Basic Usage Example
+### Quick Example
 
-We want to minimize a non-differentiable function obtained by taking the `max` over a set of functions. 
+We seek to minimize a function obtained by taking the `max` over a set of affine functions. 
 The feasible set considered is the set of non-negative real numbers, i.e., <img src="https://latex.codecogs.com/svg.latex?\mathbb{X}&space;=&space;\mathbb{R}^&plus;" title="\mathbb{X} = \mathbb{R}^+"/>
 for which the projection operation is straightforward. 
 <p align="center">
@@ -158,18 +163,3 @@ the computation of approximate solutions to these models on distributed environm
 ### Contributing
 
 Contributions and pull requests are very much welcome. The [TODO](TODO.txt) contains a number of tasks whose completion would be helpful.
-
-## Cite
-
-~~~~
-@article{Vujanic2018,
-	title={Dual Decomposition of Stochastic Integer Programs: New Results and Experimental Comparison of Solution Methods},
-	author={Vujanic, Robin and Esfahani, Peyman Mohajerin},
-	journal={TO BE COMPLETED},
-	volume={TO BE COMPLETED},
-	number={TO BE COMPLETED},
-	pages={TO BE COMPLETED},
-	year={2018},
-	publisher={TO BE COMPLETED}
-}
-~~~~ 

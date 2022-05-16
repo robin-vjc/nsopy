@@ -1,9 +1,7 @@
-from __future__ import print_function
-
 import numpy as np
-from nsopy.loggers import GenericDualMethodLogger
+from nsopy.loggers import GenericDualMethodLogger, GenericMethodLogger
 from nsopy.methods.quasi_monotone import SGMDoubleSimpleAveraging, SGMTripleAveraging
-from tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample
+from tests.analytical_oracles import AnalyticalExampleInnerProblem, BertsekasCounterExample, OneDimensionalProblem
 
 
 def test_DSA_on_analytical_example():
@@ -123,3 +121,14 @@ def test_DSA_on_Bertsekas_example():
     assert 0 <= logger.lambda_k_iterates[-1][1] <= 0.5  # second coordinate should be ~0
     # with value close to dual optimum
     np.testing.assert_allclose(logger.d_k_iterates[-1], 23.15, rtol=1e-1, atol=0)
+
+
+def test_DSA_on_piecewise_linear_example():
+    analytical_example = OneDimensionalProblem()
+    method = SGMDoubleSimpleAveraging(analytical_example.oracle, analytical_example.projection_function, dimension=1, gamma=1.0)
+    logger = GenericMethodLogger(method)
+
+    for iteration in range(500):
+        method.step()
+
+    np.testing.assert_allclose(logger.x_k_iterates[-1], 2.25, atol=0.1)

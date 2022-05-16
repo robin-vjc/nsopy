@@ -23,10 +23,7 @@ class OneDimensionalProblem:
 
     @staticmethod
     def projection_function(x_k):
-        if x_k is 0:
-            return np.array([0, ])
-        else:
-            return np.maximum(x_k, 0)
+        return np.maximum(x_k, 0)
 
 
 class AnalyticalExampleInnerProblem(object):
