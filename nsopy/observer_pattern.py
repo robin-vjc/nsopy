@@ -15,9 +15,6 @@ class Observable(object):
 
 
 class Observer(object):
+    """ Make object an observer. """
     def update(self):
-        """
-        This method is called whenever an Observable object calls notify_observers()
-        (usually when the Observable object changes state).
-        """
         raise NotImplementedError()
