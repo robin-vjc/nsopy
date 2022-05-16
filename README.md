@@ -22,7 +22,7 @@ pip install nsopy
 
 ## Usage
 
-See <the docs>.
+See [the official documentation](https://nsopy.readthedocs.io/en/latest/index.html).
 
 ### Quick Example
 
