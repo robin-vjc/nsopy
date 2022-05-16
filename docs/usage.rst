@@ -16,15 +16,13 @@ Creating recipes
 ----------------
 
 To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+you can use the ``nsopy.loggers.GenericMethodLogger`` function:
 
-.. autofunction:: lumache.get_random_ingredients
+.. autofunction:: nsopy.utils.invert_oracle_sense
 
 The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
+or ``"veggies"``. Otherwise, :py:func:`lumache.GenericMethodLogger`
 will raise an exception.
-
-.. autoexception:: lumache.InvalidKindError
 
 For example:
 
