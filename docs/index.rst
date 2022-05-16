@@ -50,9 +50,13 @@ with
     f_3(x) = x - 2
     \end{array}
 
-.. image:: img/example_graph.png
+We can visualize the problem and note that the solution is :math:`x^\star = 2.25`.
 
-**Constraints:** In the minimization problem we require that :math:`x \geq 0`.
+.. image:: img/example_graph.png
+    :width: 400
+
+**Constraints:** In the minimization problem we require that solutions satisfy :math:`x \geq 0`.
+The blue color is used in the figure to indicate this.
 To enable **nsopy** to satisfy this, we need to supply it with a **projection function**: given a point :math:`x` that
 does not necessarily satisfy :math:`x \geq 0`, it returns the *closest* (in :math:`\ell_2` sense) point that does.
 
@@ -60,8 +64,52 @@ For this example:
 
 .. code-block:: python
 
+    import numpy as np
+
     def projection_function(x_k):
         return np.maximum(x_k, 0)
+
+.. note::
+
+   A list of common projection functions can be found `here <https://github.com/robin-vjc/nsopy/blob/master/docs/img/simple_projections.png>`
+
+We define the function to optimize:
+
+.. code-block:: python
+
+    def oracle(x_k):
+        # evaluation of the f_i components at x_k
+        fi_x_k = [-2*x_k + 2,  -1.0/3*x_k + 1,  x_k - 2]
+
+        f_x_k = max(fi_x_k)  # function value at x_k
+
+        diff_fi = [-2, -1.0/3.0, 1]  # gradients of the components
+        max_i = fi_x_k.index(f_x_k)
+        # subgradient at x_k is the gradient of the active function component; cast as (1x1 dimensional) np.array
+        diff_f_xk = np.array([diff_fi[max_i], ])
+
+        return 0, f_x_k, diff_f_xk
+
+And solve:
+
+.. code-block:: python
+
+    from nsopy.methods.subgradient import SubgradientMethod
+    from nsopy.loggers import GenericMethodLogger
+
+    method = SubgradientMethod(oracle, projection_function, dimension=1, stepsize_0=0.1, stepsize_rule='constant', sense='min')
+    logger = GenericMethodLogger(method)
+
+    for iteration in range(200):
+        method.step()
+
+Inspect the solution:
+
+.. code-block:: python
+
+    print(logger.x_k_iterates[-5:])
+    >>> [2.1999999999999904, 2.216666666666657, 2.2333333333333236, 2.2499999999999902, 2.266666666666657]
+
 
 Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project.
 
