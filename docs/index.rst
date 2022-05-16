@@ -7,12 +7,13 @@ It is applicable to problems of the form
 
 .. math::
 
-    \begin{eqnarray}
+    \begin{array}{ll}
     \min & f(x)\\
     \mathrm{s.t.} & x \in \mathbb{X}
-    \end{eqnarray}
+    \end{array}
 
 where:
+
 * :math:`f(x)` is convex, but not necessarily differentiable
 * :math:`\mathbb{X} \subseteq \mathbb{R}^n` is convex
 
@@ -25,43 +26,42 @@ Installation
    $ pip install nsopy
 
 
-.. _quickstart:
+.. _example:
 
-Quick Start
------------
+Example
+-------
 
 We seek to minimize the following piece-wise affine function:
 
 .. math::
 
-    \begin{eqnarray}
-    \min_x & \max_i f_i(x)\\
+    \begin{array}{ll}
+    \min\limits_x & \max_i f_i(x)\\
     \mathrm{s.t.} & x \geq 0
-    \end{eqnarray}
+    \end{array}
 
 with
 
 .. math::
 
-    \begin{aligned}
+    \begin{array}{ll}
     f_1(x) = -2x + 2\\
     f_2(x) = -\frac{1}{3}x + 1\\
     f_3(x) = x - 2
-    \end{aligned}
+    \end{array}
 
-In the minimization problem we require our solutions to satisfy the constraint :math:`x \geq 0`.
-To enable `nsopy` to satisfy this, we need to provide a **projection function**: given a point $x$ that
+.. image:: example_graph.png
+
+**Constraints:** In the minimization problem we require that :math:`x \geq 0`.
+To enable **nsopy** to satisfy this, we need to supply it with a **projection function**: given a point :math:`x` that
 does not necessarily satisfy :math:`x \geq 0`, it returns the *closest* (in :math:`\ell_2` sense) point that does.
 
-This is how we can construct the projection function in this case:
+For this example:
 
 .. code-block:: python
 
     def projection_function(x_k):
-        if x_k is 0:
-            return np.array([0,])
-        else:
-            return np.maximum(x_k, 0)
+        return np.maximum(x_k, 0)
 
 Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project.
 
