@@ -56,12 +56,12 @@ does not necessarily satisfy :math:`x \geq 0`, it returns the *closest* (in :mat
 This is how we can construct the projection function in this case:
 
 .. code-block:: python
+
     def projection_function(x_k):
         if x_k is 0:
             return np.array([0,])
         else:
             return np.maximum(x_k, 0)
-
 
 Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project.
 
