@@ -1,18 +1,6 @@
 # nsopy - non-smooth optimization in Python
 
-A set of first-order methods for solving
-
-![optimization problem](img/min_opt.png "Non-Smooth Optimization Program")
-
-when
-* f(x) is convex, but not necessarily differentiable
-* the set ![X](img/XR.png) is convex
-
-The following methods are implemented:
-* **Classical Subgradient Method**, see [Wikipedia](https://en.wikipedia.org/wiki/Subgradient_method).
-* **Quasi-Monotone Methods**: double simple averaging, and triple averaging methods from [this Nesterov's paper](http://link.springer.com/article/10.1007/s10957-014-0677-5).
-* **Universal Gradient Methods**: primal, dual and fast versions of methods from [this Nesterov's paper](http://link.springer.com/article/10.1007/s10107-014-0790-0).
-* **Cutting Planes/Bundle Methods**: see, e.g., these [lecture notes by Alessandro Belloni](https://faculty.fuqua.duke.edu/~abn5/LecturesIntroBundle.pdf).
+nsopy is a Python library implementing a set of first order methods to solve non-smooth, constrained convex optimization models.
 
 ## Installation
 
