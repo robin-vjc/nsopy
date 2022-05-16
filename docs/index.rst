@@ -50,7 +50,7 @@ with
     f_3(x) = x - 2
     \end{array}
 
-.. image:: example_graph.png
+.. image:: img/example_graph.png
 
 **Constraints:** In the minimization problem we require that :math:`x \geq 0`.
 To enable **nsopy** to satisfy this, we need to supply it with a **projection function**: given a point :math:`x` that

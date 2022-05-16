@@ -18,7 +18,7 @@ We seek to minimize a function obtained by taking the `max` over a set of affine
 The feasible set considered is the set of non-negative real numbers, i.e., <img src="https://latex.codecogs.com/svg.latex?\mathbb{X}&space;=&space;\mathbb{R}^&plus;" title="\mathbb{X} = \mathbb{R}^+"/>
 for which the projection operation is straightforward. 
 <p align="center">
-  <img src="./img/basic_example.png" alt="Example" width="65%" href="#"/>
+  <img src="docs/img/basic_example.png" alt="Example" width="65%" href="#"/>
 </p>
 
 It is straightforward to see that the optimum is at `x* = 2.25`; we can solve this optimization problem numerically as follows:
@@ -121,7 +121,7 @@ BundleMethod(oracle, projection_function, dimension=0, epsilon=0.01, mu=0.5, sen
 The basic usage example above illustrates an oracle implementing such a special case. 
 For this example, alternatively one could have instantiated the solution method with `dimension = 1`.  
 
-* The first-order oracle must also provide a projection function; [here is a list of cases](img/simple_projections.png) for which 
+* The first-order oracle must also provide a projection function; [here is a list of cases](docs/img/simple_projections.png) for which 
 the projection operation is computationally inexpensive.
 
 * Currently, all methods are implemented in Python. Numerical performance is not optimized, but they may
@@ -133,13 +133,13 @@ evaluating the first order oracle.
 
 * See [analytical example](./notebooks/AnalyticalExample.ipynb) for a more challenging optimization model.
 <p align="center">
-  <img src="./img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
+  <img src="docs/img/solved_ex_1.png" alt="Example" width="40%" href="#"/>
 </p>
 
 
 * How to get [approximate solutions to structured MILPs](./notebooks/ApplicationToDuality.ipynb) using Lagrangian duality.
 <p align="center">
-  <img src="./img/primal_problem.png" alt="Example 2" href="#"/>
+  <img src="docs/img/primal_problem.png" alt="Example 2" href="#"/>
 </p>
 
 
