@@ -6,14 +6,14 @@ Usage
 Installation
 ------------
 
-To use Lumache, first install it using pip:
+To use nsopy, first install it using pip:
 
 .. code-block:: console
 
    (.venv) $ pip install lumache
 
-Creating recipes
-----------------
+Quick Start
+-----------
 
 To retrieve a list of random ingredients,
 you can use the ``nsopy.loggers.GenericMethodLogger`` function:
@@ -21,7 +21,7 @@ you can use the ``nsopy.loggers.GenericMethodLogger`` function:
 .. autofunction:: nsopy.utils.invert_oracle_sense
 
 The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.GenericMethodLogger`
+or ``"veggies"``. Otherwise, :py:func:`nsopy.loggers.GenericMethodLogger`
 will raise an exception.
 
 For example:
