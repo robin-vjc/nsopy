@@ -9,9 +9,6 @@ pip install nsopy
 ```
 
 ## Usage
-
-See [the official documentation](https://nsopy.readthedocs.io/en/latest/index.html).
-
 ### Quick Example
 
 We seek to minimize a function obtained by taking the `max` over a set of affine functions. 
